@@ -5,6 +5,10 @@
     </PropertyGroup>
 
     <ItemGroup>
+      <None Include="umbraco\Data\Umbraco.sdf" />
+    </ItemGroup>
+
+    <ItemGroup>
         <PackageReference Include="Umbraco.Cms" Version="9.2.0" />
         <PackageReference Include="Umbraco.Cms.SqlCe" Version="9.2.0" />
         <PackageReference Include="Umbraco.SqlServerCE" Version="4.0.0.1" />
