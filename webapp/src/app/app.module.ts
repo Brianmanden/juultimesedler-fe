@@ -1,16 +1,23 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
-import { AppComponent } from './app.component';
+import {FormsModule} from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
+import { AppComponent }   from './app.component';
+
+import { CalendarModule } from 'primeng/calendar';
 
 @NgModule({
-  declarations: [
-    AppComponent
-  ],
   imports: [
-    BrowserModule
+    BrowserModule,
+    BrowserAnimationsModule,
+    CalendarModule,
+    FormsModule,
   ],
+  bootstrap: [AppComponent],
+  declarations: [ AppComponent ],
   providers: [],
-  bootstrap: [AppComponent]
 })
 export class AppModule { }
