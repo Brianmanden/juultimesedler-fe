@@ -1,19 +1,9 @@
-<button pButton title="test">123</button>
-
 <div class="p-fluid p-grid p-formgrid">
-  <div class="p-field p-col-12 p-md-4">
-    <label for="basic">Basic</label>
-    <p-calendar inputId="basic" [(ngModel)]="date1"></p-calendar>
-    <p-calendar [(ngModel)]="dateValue" [showTransitionOptions]="'250ms'" [hideTransitionOptions]="'250ms'"></p-calendar>
-  </div>
-  <p>-1-</p>
-  <div class="p-field p-col-12 p-md-4">
-    <label for="basic">Basic</label>
-    <p-calendar [(ngModel)]="value"></p-calendar>
-    <p-calendar [(ngModel)]="date10">
-      <ng-template pTemplate="date" let-date>
-          <span [ngStyle]="{outline: (date.day < 21 && date.day > 10) ? '1px groove red' : 'none'}">{{date.day}}</span>
-      </ng-template>
-  </p-calendar>
+  <div class="p-fluid p-grid p-formgrid">
+    <div class="p-field p-col-12 p-md-4">
+      <label>Calendar with Time</label>
+      <p-calendar [showTime]="true"></p-calendar>
+    </div>
   </div>
 </div>
+

@@ -1,3 +1,4 @@
+import { Time } from '@angular/common';
 import { Component } from '@angular/core';
 
 @Component({
@@ -27,6 +28,9 @@ export class AppComponent {
   date12: Date;
   date13: Date;
   date14: Date;
+
+  startTime: Time;
+  endTime: Time;
   
   dates: Date[];
   rangeDates: Date[];
