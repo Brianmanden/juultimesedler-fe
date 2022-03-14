@@ -1,9 +1,129 @@
 <div class="p-fluid p-grid p-formgrid">
-  <div class="p-fluid p-grid p-formgrid">
+  <div class="row">
+    <div class="p-field p-col-12 p-md-4">
+      <div class="card">
+        <h5>Uge 12</h5>
+        <p-tabView [scrollable]="true">
+          <p-tabPanel header="Mandag - d.14.">
+            <div class="row">
+              <h5>Projekter</h5>
+              <p-autoComplete [(ngModel)]="selectedCountryAdvanced" [suggestions]="filteredCountries" (completeMethod)="filterCountry($event)" field="name" [dropdown]="true">
+                <ng-template let-country pTemplate="item">
+                  <div class="country-item">
+                    <img src="assets/showcase/images/demo/flag/flag_placeholder.png" [class]="'flag flag-' + country.code.toLowerCase()" />
+                    <div>{{country.name}}</div>
+                  </div>
+                </ng-template>
+              </p-autoComplete>
+            </div>
+
+            <div class="row">
+              <div class="p-field p-col-12 p-md-4">
+                <label>Starttid</label>
+                <p-calendar [showTime]="true" [showWeek]="true" [stepMinute]="15"></p-calendar>
+              </div>
+            </div>
+            <div class="row">
+              <div class="p-field p-col-12 p-md-4">
+                <label>Sluttid</label>
+                <p-calendar [showTime]="true"></p-calendar>
+              </div>
+            </div>
+
+            <h5>Opgave beskrivelse</h5>
+            <input type="text" pInputText [(ngModel)]="jobDesc"> 
+            <span class="p-ml-2">{{jobDesc}}</span>
+          </p-tabPanel>
+          <p-tabPanel header="Tirsdag">
+            <p>
+              Sed ut perspiciatis unde omnis iste natus error sit voluptatem
+              accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab
+              illo inventore veritatis et quasi architecto beatae vitae dicta sunt
+              explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut
+              odit aut fugit, sed quia consequuntur magni dolores eos qui ratione
+              voluptatem sequi nesciunt. Consectetur, adipisci velit, sed quia non
+              numquam eius modi.
+            </p>
+          </p-tabPanel>
+          <p-tabPanel header="Onsdag">
+            <p>
+              At vero eos et accusamus et iusto odio dignissimos ducimus qui
+              blanditiis praesentium voluptatum deleniti atque corrupti quos dolores
+              et quas molestias excepturi sint occaecati cupiditate non provident,
+              similique sunt in culpa qui officia deserunt mollitia animi, id est
+              laborum et dolorum fuga. Et harum quidem rerum facilis est et expedita
+              distinctio. Nam libero tempore, cum soluta nobis est eligendi optio
+              cumque nihil impedit quo minus.
+            </p>
+          </p-tabPanel>
+          <p-tabPanel header="Torsdag">
+            <p>
+              Sed ut perspiciatis unde omnis iste natus error sit voluptatem
+              accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab
+              illo inventore veritatis et quasi architecto beatae vitae dicta sunt
+              explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut
+              odit aut fugit, sed quia consequuntur magni dolores eos qui ratione
+              voluptatem sequi nesciunt. Consectetur, adipisci velit, sed quia non
+              numquam eius modi.
+            </p>
+          </p-tabPanel>
+          <p-tabPanel header="Fredag">
+            <p>
+              At vero eos et accusamus et iusto odio dignissimos ducimus qui
+              blanditiis praesentium voluptatum deleniti atque corrupti quos dolores
+              et quas molestias excepturi sint occaecati cupiditate non provident,
+              similique sunt in culpa qui officia deserunt mollitia animi, id est
+              laborum et dolorum fuga. Et harum quidem rerum facilis est et expedita
+              distinctio. Nam libero tempore, cum soluta nobis est eligendi optio
+              cumque nihil impedit quo minus.
+            </p>
+          </p-tabPanel>
+          <p-tabPanel header="Lørdag">
+            <p>
+              Sed ut perspiciatis unde omnis iste natus error sit voluptatem
+              accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab
+              illo inventore veritatis et quasi architecto beatae vitae dicta sunt
+              explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut
+              odit aut fugit, sed quia consequuntur magni dolores eos qui ratione
+              voluptatem sequi nesciunt. Consectetur, adipisci velit, sed quia non
+              numquam eius modi.
+            </p>
+          </p-tabPanel>
+          <p-tabPanel header="Søndag">
+            <p>
+              At vero eos et accusamus et iusto odio dignissimos ducimus qui
+              blanditiis praesentium voluptatum deleniti atque corrupti quos dolores
+              et quas molestias excepturi sint occaecati cupiditate non provident,
+              similique sunt in culpa qui officia deserunt mollitia animi, id est
+              laborum et dolorum fuga. Et harum quidem rerum facilis est et expedita
+              distinctio. Nam libero tempore, cum soluta nobis est eligendi optio
+              cumque nihil impedit quo minus.
+            </p>
+          </p-tabPanel>
+        </p-tabView>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
     <div class="p-field p-col-12 p-md-4">
       <label>Calendar with Time</label>
       <p-calendar [showTime]="true"></p-calendar>
     </div>
   </div>
+  <br />
+  <div class="row">
+    <div class="p-field p-col-12 p-md-4">
+      <p-autoComplete
+        [(ngModel)]="items"
+        [suggestions]="results"
+        (completeMethod)="search($event)"
+        [dropdown]="true"
+        [multiple]="true">
+      </p-autoComplete>
+    </div>
+  </div>
+
 </div>
+
 

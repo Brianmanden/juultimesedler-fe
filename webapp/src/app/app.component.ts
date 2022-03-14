@@ -1,3 +1,4 @@
+import { query } from '@angular/animations';
 import { Time } from '@angular/common';
 import { Component } from '@angular/core';
 
@@ -7,13 +8,17 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'juultimesedler';
-
-  value: Date;
-  dateValue: Date;
-
+  results: string[] = ["Byg1","Byg2","Byg3","Ombyg1","Ombyg2"];
   showButtonBar: boolean;
-
+  text: string;
+  title = 'juultimesedler';
+  value: Date;
+  items: string[] = ["Byg1","Byg2","Byg3","Ombyg1","Ombyg2", "Ombyg3", "Riv1", "Riv2", "Riv3" ];
+  filteredItems: any[];
+  jobDesc: string;
+  
+  dateValue: Date;
+  dates: Date[];
   date1: Date;
   date2: Date;
   date3: Date;
@@ -28,17 +33,35 @@ export class AppComponent {
   date12: Date;
   date13: Date;
   date14: Date;
+  invalidDates: Array<Date>
 
   startTime: Time;
   endTime: Time;
   
-  dates: Date[];
   rangeDates: Date[];
   minDate: Date;
   maxDate: Date;
   es: any;
 
-  invalidDates: Array<Date>
+  // TEMP
+  countries: any[] = [{name: "SWE"}, {name: "NOR"}, {name: "DEN"}, ];
+  selectedCountryAdvanced: any[];
+  filteredCountries: any[];
+
+  filterCountry(event: { query: any; }) {
+    //in a real application, make a request to a remote url with the query and return filtered results, for demo we filter at client side
+    let filtered : any[] = [];
+    let query = event.query;
+
+    for(let i = 0; i < this.countries.length; i++) {
+        let country = this.countries[i];
+        if (country.name.toLowerCase().indexOf(query.toLowerCase()) == 0) {
+            filtered.push(country);
+        }
+    }
+
+    this.filteredCountries = filtered;
+}
 
   ngOnInit() {
       this.es = {
@@ -69,5 +92,43 @@ export class AppComponent {
       let invalidDate = new Date();
       invalidDate.setDate(today.getDate() - 1);
       this.invalidDates = [today,invalidDate];
+  }
+
+
+  search(event: { query: any; }) {
+    let filtered : any[] = [];
+    let query = event.query;
+    console.log(query);
+
+    for(let i = 0; i < this.items.length; i++) {
+        let item = this.items[i];
+        if (item.includes(query.toLowerCase())) {
+          console.log(item);
+          filtered.push(item);
+          this.results.push(item);
+        }
+    }
+
+    this.filteredItems = filtered;
+  }
+
+  handleDropdown(event: { query: any; }) {
+    console.log(event.query);
+  }
+
+  filterItems(event: { query: any; }) {
+    let filtered : any[] = [];
+    let query = event.query;
+    console.log(query);
+
+    for(let i = 0; i < this.items.length; i++) {
+        let item = this.items[i];
+        if (item.includes(query.toLowerCase())) {
+          console.log(item);
+          filtered.push(item);
+        }
+    }
+
+    this.filteredItems = filtered;
   }
 }
