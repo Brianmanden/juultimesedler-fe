@@ -26,9 +26,12 @@
                 [timeOnly]="true"
                 [touchUI]="true"
                 [readonlyInput]="true">
+                <ng-template pTemplate="header" let-date>
+                  <span [ngStyle]="{ 'visibility': ( endTime < startTime ) ? 'visible' : 'hidden'}">Starttid kan ikke være efter sluttid</span>
+                </ng-template>
               </p-calendar>
             </div>
-
+            
             <div class="row">
               <label>Sluttid</label>
               <p-calendar
@@ -38,10 +41,14 @@
                 [timeOnly]="true"
                 [touchUI]="true"
                 [readonlyInput]="true">
-              </p-calendar>
-            </div>
-
-            <div class="row">
+                <ng-template pTemplate="header" let-date>
+                  <span [ngStyle]="{ 'visibility': ( endTime < startTime ) ? 'visible' : 'hidden'}">Sluttid kan ikke være før starttid</span>
+                </ng-template>
+            </p-calendar>
+            <span [ngStyle]="{ 'visibility': ( endTime < startTime ) ? 'visible' : 'hidden'}">Angiv korrekte tider</span>
+          </div>
+          
+          <div class="row">
               <label>Opgave beskrivelse</label>
               <input type="text" pInputText [(ngModel)]="jobDesc"> 
               <span class="p-ml-2">{{jobDesc}}</span>
