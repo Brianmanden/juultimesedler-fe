@@ -6,7 +6,7 @@
         <p-tabView [scrollable]="true">
           <p-tabPanel header="Mandag - d.14.">
             <div class="row">
-              <h5>Projekter</h5>
+              <label>Projekter</label>
               <p-autoComplete [(ngModel)]="selectedCountryAdvanced" [suggestions]="filteredCountries" (completeMethod)="filterCountry($event)" field="name" [dropdown]="true">
                 <ng-template let-country pTemplate="item">
                   <div class="country-item">
@@ -18,21 +18,45 @@
             </div>
 
             <div class="row">
-              <div class="p-field p-col-12 p-md-4">
-                <label>Starttid</label>
-                <p-calendar [showTime]="true" [showWeek]="true" [stepMinute]="15"></p-calendar>
-              </div>
-            </div>
-            <div class="row">
-              <div class="p-field p-col-12 p-md-4">
-                <label>Sluttid</label>
-                <p-calendar [showTime]="true"></p-calendar>
-              </div>
+              <label>Starttid</label>
+              <p-calendar
+                [(ngModel)]="startTime"
+                [showTime]="true"
+                [stepMinute]="15"
+                [timeOnly]="true"
+                [touchUI]="true"
+                [readonlyInput]="true">
+              </p-calendar>
             </div>
 
-            <h5>Opgave beskrivelse</h5>
-            <input type="text" pInputText [(ngModel)]="jobDesc"> 
-            <span class="p-ml-2">{{jobDesc}}</span>
+            <div class="row">
+              <label>Sluttid</label>
+              <p-calendar
+                [(ngModel)]="endTime"
+                [showTime]="true"
+                [stepMinute]="15"
+                [timeOnly]="true"
+                [touchUI]="true"
+                [readonlyInput]="true">
+              </p-calendar>
+            </div>
+
+            <div class="row">
+              <label>Opgave beskrivelse</label>
+              <input type="text" pInputText [(ngModel)]="jobDesc"> 
+              <span class="p-ml-2">{{jobDesc}}</span>
+            </div>
+
+            <div class="row">
+              <p-autoComplete
+                [(ngModel)]="items"
+                [suggestions]="results"
+                (completeMethod)="search($event)"
+                [dropdown]="true"
+                [multiple]="true">
+              </p-autoComplete>
+            </div>
+
           </p-tabPanel>
           <p-tabPanel header="Tirsdag">
             <p>
@@ -104,26 +128,8 @@
       </div>
     </div>
   </div>
-
-  <div class="row">
-    <div class="p-field p-col-12 p-md-4">
-      <label>Calendar with Time</label>
-      <p-calendar [showTime]="true"></p-calendar>
-    </div>
-  </div>
-  <br />
-  <div class="row">
-    <div class="p-field p-col-12 p-md-4">
-      <p-autoComplete
-        [(ngModel)]="items"
-        [suggestions]="results"
-        (completeMethod)="search($event)"
-        [dropdown]="true"
-        [multiple]="true">
-      </p-autoComplete>
-    </div>
-  </div>
-
+  
+  
 </div>
 
 

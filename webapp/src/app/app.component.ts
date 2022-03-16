@@ -35,8 +35,8 @@ export class AppComponent {
   date14: Date;
   invalidDates: Array<Date>
 
-  startTime: Time;
-  endTime: Time;
+  startTime: Date = new Date(2022, 2, 15, 7, 0, 0);
+  endTime: Date   = new Date(2022, 2, 15, 16, 0, 0);
   
   rangeDates: Date[];
   minDate: Date;
