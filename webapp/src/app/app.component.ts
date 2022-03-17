@@ -1,17 +1,19 @@
 import { query } from '@angular/animations';
-import { Time } from '@angular/common';
 import { Component } from '@angular/core';
+import { SelectItemGroup } from 'primeng/api';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
+
 export class AppComponent {
   results: string[] = ["Byg1","Byg2","Byg3","Ombyg1","Ombyg2"];
   showButtonBar: boolean;
   text: string;
   title = 'juultimesedler';
+
   value: Date;
   items: string[] = ["Byg1","Byg2","Byg3","Ombyg1","Ombyg2", "Ombyg3", "Riv1", "Riv2", "Riv3" ];
   filteredItems: any[];
@@ -47,6 +49,11 @@ export class AppComponent {
   countries: any[] = [{name: "SWE"}, {name: "NOR"}, {name: "DEN"}, ];
   selectedCountryAdvanced: any[];
   filteredCountries: any[];
+
+  // TEMP Checkbox liste
+  selectedTasks: any[];
+  groupedTasks: SelectItemGroup[];
+
 
   filterCountry(event: { query: any; }) {
     //in a real application, make a request to a remote url with the query and return filtered results, for demo we filter at client side
@@ -92,8 +99,38 @@ export class AppComponent {
       let invalidDate = new Date();
       invalidDate.setDate(today.getDate() - 1);
       this.invalidDates = [today,invalidDate];
-  }
 
+      this.groupedTasks = [
+        {
+          label: "GIPS",
+          value: "gips",
+          items: [
+            { label: "Slæbe gipsplader", value: "slæbeGipsplader" },
+            { label: "Montere vinkler", value: "montereVinkler" },
+            { label: "Skrue gipsplader", value: "skrueGipsplader" },
+            { label: "Spartle gipsplader", value: "spartleGipsplader" }
+          ]
+        },
+        {
+          label: "RIVE",
+          value: "rive",
+          items: [
+            { label: "Rive gammel gipsvæg", value: "riveGammelGipsVaeg" },
+            { label: "Rive gammel butik", value: "riveGammelButik" },
+            { label: "Rive gammel kontor", value: "riveGammelKontor" },
+          ]
+        },
+        {
+          label: "Oprydning",
+          value: "oprydning",
+          items: [
+            { label: "Generel oprydning", value: "generelOprydning" },
+            { label: "Feje", value: "feje" },
+            { label: "Fjerne skrammel", value: "fjerneSkrammel" },
+          ]
+        }
+      ];
+  }
 
   search(event: { query: any; }) {
     let filtered : any[] = [];

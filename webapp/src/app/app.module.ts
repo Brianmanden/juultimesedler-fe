@@ -6,6 +6,7 @@ import { FormsModule } from '@angular/forms';
 import { NgModule } from '@angular/core';
 import { TabViewModule } from 'primeng/tabview';
 import { InputTextModule } from 'primeng/inputtext';
+import { ListboxModule } from 'primeng/listbox';
 
 import { AutoCompleteModule } from 'primeng/autocomplete';
 
@@ -19,6 +20,7 @@ import { AutoCompleteModule } from 'primeng/autocomplete';
     FormsModule,
     TabViewModule,
     InputTextModule,
+    ListboxModule,
   ],
   bootstrap: [AppComponent],
   declarations: [ AppComponent ],

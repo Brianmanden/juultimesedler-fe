@@ -5,8 +5,9 @@
         <h5>Uge 12</h5>
         <p-tabView [scrollable]="true">
           <p-tabPanel header="Mandag - d.14.">
+
             <div class="row">
-              <label>Projekter</label>
+              <label>Projekt</label>
               <p-autoComplete [(ngModel)]="selectedCountryAdvanced" [suggestions]="filteredCountries" (completeMethod)="filterCountry($event)" field="name" [dropdown]="true">
                 <ng-template let-country pTemplate="item">
                   <div class="country-item">
@@ -31,7 +32,7 @@
                 </ng-template>
               </p-calendar>
             </div>
-            
+
             <div class="row">
               <label>Sluttid</label>
               <p-calendar
@@ -44,27 +45,56 @@
                 <ng-template pTemplate="header" let-date>
                   <span [ngStyle]="{ 'visibility': ( endTime < startTime ) ? 'visible' : 'hidden'}">Sluttid kan ikke være før starttid</span>
                 </ng-template>
-            </p-calendar>
-            <span [ngStyle]="{ 'visibility': ( endTime < startTime ) ? 'visible' : 'hidden'}">Angiv korrekte tider</span>
-          </div>
+              </p-calendar>
+              <span [ngStyle]="{ 'visibility': ( endTime < startTime ) ? 'visible' : 'hidden'}">Angiv korrekte tider</span>
+            </div>
           
-          <div class="row">
-              <label>Opgave beskrivelse</label>
-              <input type="text" pInputText [(ngModel)]="jobDesc"> 
-              <span class="p-ml-2">{{jobDesc}}</span>
+            <div class="row">
+              <span class="p-float-label">
+                <textarea
+                  [(ngModel)]="jobDesc"
+                  id="float-input"
+                  rows="5"
+                  cols="30"
+                  pinputtextarea=""
+                  class="p-inputtextarea p-inputtext p-component p-element">
+                </textarea>
+                <label for="float-input">Udførte opgaver</label>
+              </span>
             </div>
 
             <div class="row">
+              <h5>Liste over opgaver</h5>
+              <p-listbox
+                [(ngModel)]="selectedTasks"
+                [options]="groupedTasks"
+                [group]="true"
+                [metaKeySelection]="false"
+                [checkbox]="true"
+                [filter]="true"
+                [multiple]="true"
+                [listStyle]="{'max-height':'250px'}"
+                [style]="{'width':'15rem'}">
+                <ng-template let-group pTemplate="group">
+                  <div class="p-d-flex p-ai-center">
+                    <span>{{group.label}}</span>
+                  </div>
+                </ng-template>
+              </p-listbox>
+            </div>
+
+            <!-- <div class="row">
               <p-autoComplete
                 [(ngModel)]="items"
                 [suggestions]="results"
                 (completeMethod)="search($event)"
-                [dropdown]="true"
+                [dropdown]="false"
                 [multiple]="true">
               </p-autoComplete>
-            </div>
+            </div> -->
 
           </p-tabPanel>
+
           <p-tabPanel header="Tirsdag">
             <p>
               Sed ut perspiciatis unde omnis iste natus error sit voluptatem
