@@ -7,6 +7,7 @@ import { NgModule } from '@angular/core';
 import { TabViewModule } from 'primeng/tabview';
 import { InputTextModule } from 'primeng/inputtext';
 import { ListboxModule } from 'primeng/listbox';
+import {MultiSelectModule} from 'primeng/multiselect';
 
 import { AutoCompleteModule } from 'primeng/autocomplete';
 
@@ -21,6 +22,7 @@ import { AutoCompleteModule } from 'primeng/autocomplete';
     TabViewModule,
     InputTextModule,
     ListboxModule,
+    MultiSelectModule,
   ],
   bootstrap: [AppComponent],
   declarations: [ AppComponent ],

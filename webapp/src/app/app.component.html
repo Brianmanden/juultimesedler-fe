@@ -18,6 +18,7 @@
               </p-autoComplete>
             </div>
 
+            <!-- TIME PICKER STARTTIME -->
             <div class="row">
               <label>Starttid</label>
               <p-calendar
@@ -33,6 +34,7 @@
               </p-calendar>
             </div>
 
+            <!-- TIME PICKER ENDTIME -->
             <div class="row">
               <label>Sluttid</label>
               <p-calendar
@@ -49,6 +51,7 @@
               <span [ngStyle]="{ 'visibility': ( endTime < startTime ) ? 'visible' : 'hidden'}">Angiv korrekte tider</span>
             </div>
           
+            <!-- TEXTAREA -->
             <div class="row">
               <span class="p-float-label">
                 <textarea
@@ -63,11 +66,22 @@
               </span>
             </div>
 
-            <div class="row">
+            <!-- MULTISELECT w. CHIPS -->
+            <h5>Liste over opgaver - predefinerede</h5>
+            <p-multiSelect
+              [(ngModel)]="selectedTasks"
+              [options]="definedTasks"
+              defaultLabel="Vælg udførte opgaver"
+              optionLabel="name"
+              display="chip">
+            </p-multiSelect>
+
+            <!-- LISTBOX -->
+            <!-- <div class="row">
               <h5>Liste over opgaver</h5>
               <p-listbox
                 [(ngModel)]="selectedTasks"
-                [options]="groupedTasks"
+                [options]="definedTasks"
                 [group]="true"
                 [metaKeySelection]="false"
                 [checkbox]="true"
@@ -81,8 +95,9 @@
                   </div>
                 </ng-template>
               </p-listbox>
-            </div>
+            </div> -->
 
+            <!-- AUTOCOMPLETE -->
             <!-- <div class="row">
               <p-autoComplete
                 [(ngModel)]="items"
