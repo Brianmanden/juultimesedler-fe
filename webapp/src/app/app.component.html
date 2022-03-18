@@ -29,7 +29,10 @@
                 [touchUI]="true"
                 [readonlyInput]="true">
                 <ng-template pTemplate="header" let-date>
-                  <span [ngStyle]="{ 'visibility': ( endTime < startTime ) ? 'visible' : 'hidden'}">Starttid kan ikke være efter sluttid</span>
+                  <p-message
+                  [ngStyle]="{ 'visibility': ( endTime <= startTime ) ? 'visible' : 'hidden' }"
+                  severity="warn" text="Starttid skal være før sluttid!"
+                  styleClass="p-mr-2"></p-message>
                 </ng-template>
               </p-calendar>
             </div>
@@ -45,40 +48,31 @@
                 [touchUI]="true"
                 [readonlyInput]="true">
                 <ng-template pTemplate="header" let-date>
-                  <span [ngStyle]="{ 'visibility': ( endTime < startTime ) ? 'visible' : 'hidden'}">Sluttid kan ikke være før starttid</span>
+                  <p-message
+                    [ngStyle]="{ 'visibility': ( endTime <= startTime ) ? 'visible' : 'hidden' }"
+                    severity="warn" text="Sluttid skal være efter starttid!"
+                    styleClass="p-mr-2"></p-message>
                 </ng-template>
               </p-calendar>
-              <span [ngStyle]="{ 'visibility': ( endTime < startTime ) ? 'visible' : 'hidden'}">Angiv korrekte tider</span>
+              <p-message
+                [ngStyle]="{ 'visibility': ( endTime <= startTime ) ? 'visible' : 'hidden' }"
+                severity="warn" text="Angiv korrekte tider"
+                styleClass="p-mr-2"></p-message>
             </div>
-          
-            <!-- TEXTAREA -->
-            <div class="row">
-              <span class="p-float-label">
-                <textarea
-                  [(ngModel)]="jobDesc"
-                  id="float-input"
-                  rows="5"
-                  cols="30"
-                  pinputtextarea=""
-                  class="p-inputtextarea p-inputtext p-component p-element">
-                </textarea>
-                <label for="float-input">Udførte opgaver</label>
-              </span>
-            </div>
-
+     
             <!-- MULTISELECT w. CHIPS -->
-            <h5>Liste over opgaver - predefinerede</h5>
-            <p-multiSelect
+            <!-- <h5>Liste over opgaver - predefinerede</h5>
+              <p-multiSelect
               [(ngModel)]="selectedTasks"
               [options]="definedTasks"
               defaultLabel="Vælg udførte opgaver"
               optionLabel="name"
               display="chip">
-            </p-multiSelect>
+            </p-multiSelect> -->
 
             <!-- LISTBOX -->
-            <!-- <div class="row">
-              <h5>Liste over opgaver</h5>
+            <div class="row">
+              <label>Liste over opgaver</label>
               <p-listbox
                 [(ngModel)]="selectedTasks"
                 [options]="definedTasks"
@@ -95,21 +89,37 @@
                   </div>
                 </ng-template>
               </p-listbox>
-            </div> -->
+            </div>
 
             <!-- AUTOCOMPLETE -->
             <!-- <div class="row">
               <p-autoComplete
-                [(ngModel)]="items"
-                [suggestions]="results"
-                (completeMethod)="search($event)"
-                [dropdown]="false"
-                [multiple]="true">
-              </p-autoComplete>
+              [(ngModel)]="items"
+              [suggestions]="results"
+              (completeMethod)="search($event)"
+              [dropdown]="false"
+              [multiple]="true">
+            </p-autoComplete>
             </div> -->
+          
+            <!-- TEXTAREA -->
+            <div class="row">
+              <label>Liste over opgaver</label>
+              <span class="p-float-label">
+                <textarea
+                  [(ngModel)]="jobDesc"
+                  id="float-input"
+                  rows="5"
+                  cols="30"
+                  pinputtextarea=""
+                  class="p-inputtextarea p-inputtext p-component p-element">
+                </textarea>
+                <label for="float-input">Udførte opgaver</label>
+              </span>
+            </div>
 
-          </p-tabPanel>
-
+        </p-tabPanel>
+        
           <p-tabPanel header="Tirsdag">
             <p>
               Sed ut perspiciatis unde omnis iste natus error sit voluptatem

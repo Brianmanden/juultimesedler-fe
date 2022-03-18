@@ -7,9 +7,10 @@ import { NgModule } from '@angular/core';
 import { TabViewModule } from 'primeng/tabview';
 import { InputTextModule } from 'primeng/inputtext';
 import { ListboxModule } from 'primeng/listbox';
-import {MultiSelectModule} from 'primeng/multiselect';
-
+import { MultiSelectModule } from 'primeng/multiselect';
 import { AutoCompleteModule } from 'primeng/autocomplete';
+import { MessagesModule } from 'primeng/messages';
+import { MessageModule } from 'primeng/message';
 
 
 @NgModule({
@@ -23,6 +24,8 @@ import { AutoCompleteModule } from 'primeng/autocomplete';
     InputTextModule,
     ListboxModule,
     MultiSelectModule,
+    MessagesModule,
+    MessageModule,
   ],
   bootstrap: [AppComponent],
   declarations: [ AppComponent ],

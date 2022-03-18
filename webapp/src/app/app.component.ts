@@ -2,6 +2,7 @@ import { query } from '@angular/animations';
 import { Component } from '@angular/core';
 import { SelectItemGroup } from 'primeng/api';
 import { MultiSelectModule } from 'primeng/multiselect';
+import { Message } from 'primeng/api';
 
 @Component({
   selector: 'app-root',
@@ -53,8 +54,8 @@ export class AppComponent {
 
   // LISTBOX
   selectedTasks: any[];
-  // definedTasks: SelectItemGroup[];
-  definedTasks: any[];
+   definedTasks: SelectItemGroup[];
+  //definedTasks: any[];
 
   // MULTISELECT
 
@@ -103,47 +104,54 @@ export class AppComponent {
       invalidDate.setDate(today.getDate() - 1);
       this.invalidDates = [today,invalidDate];
 
-      this.definedTasks = [
-        { name: "Rive væg", code: "riveVaeg" },
-        { name: "Slæbe gips", code: "slæbeGips" },
-        { name: "Montere vinkler", code: "montereVinkler" },
-        { name: "Montere gips", code: "montereGips" },
-        { name: "Spartle gips", code: "spartleGips" },
-        { name: "Rydde op", code: "ryddeOp" },
-        { name: "Feje", code: "feje" },
-      ];
+      // this.definedTasks = [
+      //   { name: "Rive væg", code: "riveVaeg" },
+      //   { name: "Slæbe gips", code: "slæbeGips" },
+      //   { name: "Montere vinkler", code: "montereVinkler" },
+      //   { name: "Montere gips", code: "montereGips" },
+      //   { name: "Spartle gips", code: "spartleGips" },
+      //   { name: "Rydde op", code: "ryddeOp" },
+      //   { name: "Feje", code: "feje" },
+      // ];
 
       // LISTBOX
-      // this.definedTasks = [
-      //   {
-      //     label: "GIPS",
-      //     value: "gips",
-      //     items: [
-      //       { label: "Slæbe gipsplader", value: "slæbeGipsplader" },
-      //       { label: "Montere vinkler", value: "montereVinkler" },
-      //       { label: "Skrue gipsplader", value: "skrueGipsplader" },
-      //       { label: "Spartle gipsplader", value: "spartleGipsplader" }
-      //     ]
-      //   },
-      //   {
-      //     label: "RIVE",
-      //     value: "rive",
-      //     items: [
-      //       { label: "Rive gammel gipsvæg", value: "riveGammelGipsVaeg" },
-      //       { label: "Rive gammel butik", value: "riveGammelButik" },
-      //       { label: "Rive gammel kontor", value: "riveGammelKontor" },
-      //     ]
-      //   },
-      //   {
-      //     label: "Oprydning",
-      //     value: "oprydning",
-      //     items: [
-      //       { label: "Generel oprydning", value: "generelOprydning" },
-      //       { label: "Feje", value: "feje" },
-      //       { label: "Fjerne skrammel", value: "fjerneSkrammel" },
-      //     ]
-      //   }
-      // ];
+      this.definedTasks = [
+        {
+          label: "GIPS",
+          value: "gips",
+          items: [
+            { label: "Slæbe gipsplader", value: "slæbeGipsplader" },
+            { label: "Montere vinkler", value: "montereVinkler" },
+            { label: "Skrue gipsplader", value: "skrueGipsplader" },
+            { label: "Spartle gipsplader", value: "spartleGipsplader" }
+          ]
+        },
+        {
+          label: "RIVE",
+          value: "rive",
+          items: [
+            { label: "Rive gammel gipsvæg", value: "riveGammelGipsVaeg" },
+            { label: "Rive gammel butik", value: "riveGammelButik" },
+            { label: "Rive gammel kontor", value: "riveGammelKontor" },
+          ]
+        },
+        {
+          label: "OPRYDNING",
+          value: "oprydning",
+          items: [
+            { label: "Generel oprydning", value: "generelOprydning" },
+            { label: "Feje", value: "feje" },
+            { label: "Fjerne skrammel", value: "fjerneSkrammel" },
+          ]
+        },
+        {
+          label: "AFVIG",
+          value: "afvig",
+          items: [
+            { label: "Afvig01", value: "afvig01" },
+          ]
+        },
+      ];
   }
 
   search(event: { query: any; }) {
