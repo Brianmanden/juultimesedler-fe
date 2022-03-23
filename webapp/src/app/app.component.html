@@ -8,11 +8,16 @@
 
             <div class="row">
               <label>Projekt</label>
-              <p-autoComplete [(ngModel)]="selectedCountryAdvanced" [suggestions]="filteredCountries" (completeMethod)="filterCountry($event)" field="name" [dropdown]="true">
-                <ng-template let-country pTemplate="item">
-                  <div class="country-item">
-                    <img src="assets/showcase/images/demo/flag/flag_placeholder.png" [class]="'flag flag-' + country.code.toLowerCase()" />
-                    <div>{{country.name}}</div>
+              <p-autoComplete
+                [(ngModel)]="selectedProjectAdvanced"
+                [suggestions]="filteredProjects"
+                (completeMethod)="filterProject($event)"
+                field="name"
+                [dropdown]="true"
+                >
+                <ng-template let-project pTemplate="item">
+                  <div class="project-item">
+                    <div>{{project.name}} - {{project.description}}</div>
                   </div>
                 </ng-template>
               </p-autoComplete>

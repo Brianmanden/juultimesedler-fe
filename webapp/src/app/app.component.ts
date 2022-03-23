@@ -47,31 +47,33 @@ export class AppComponent {
   maxDate: Date;
   es: any;
 
-  // TEMP - Project picker
-  countries: any[] = [{name: "SWE"}, {name: "NOR"}, {name: "DEN"}, ];
-  selectedCountryAdvanced: any[];
-  filteredCountries: any[];
+  // PROJECT PICKER
+  projects: any[] = [
+    {name: "Oslo1", description: "Komplet riv og byg ny H & M"},
+    {name: "Oslo2", description: "Ny Loius Vuitton"},
+    {name: "Gardamoen", description: "Renovation Gardamoen"},
+  ];
+  selectedProjectAdvanced: any[];
+  filteredProjects: any[];
 
   // LISTBOX
   selectedTasks: any[];
-   definedTasks: SelectItemGroup[];
+  definedTasks: SelectItemGroup[];
   //definedTasks: any[];
 
-  // MULTISELECT
-
-  filterCountry(event: { query: any; }) {
+  filterProject(event: { query: any; }) {
     //in a real application, make a request to a remote url with the query and return filtered results, for demo we filter at client side
     let filtered : any[] = [];
     let query = event.query;
 
-    for(let i = 0; i < this.countries.length; i++) {
-        let country = this.countries[i];
-        if (country.name.toLowerCase().indexOf(query.toLowerCase()) == 0) {
-            filtered.push(country);
+    for(let i = 0; i < this.projects.length; i++) {
+        let project = this.projects[i];
+        if (project.name.toLowerCase().indexOf(query.toLowerCase()) == 0) {
+            filtered.push(project);
         }
     }
 
-    this.filteredCountries = filtered;
+    this.filteredProjects = filtered;
 }
 
   ngOnInit() {
