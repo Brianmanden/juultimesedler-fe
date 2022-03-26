@@ -3,6 +3,7 @@ import { Component } from '@angular/core';
 import { SelectItemGroup } from 'primeng/api';
 import { MultiSelectModule } from 'primeng/multiselect';
 import { Message } from 'primeng/api';
+import {DividerModule} from 'primeng/divider';
 
 @Component({
   selector: 'app-root',

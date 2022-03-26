@@ -11,7 +11,8 @@ import { MultiSelectModule } from 'primeng/multiselect';
 import { AutoCompleteModule } from 'primeng/autocomplete';
 import { MessagesModule } from 'primeng/messages';
 import { MessageModule } from 'primeng/message';
-
+import { DividerModule } from 'primeng/divider';
+import { TagModule } from 'primeng/tag';
 
 @NgModule({
   imports: [
@@ -26,6 +27,8 @@ import { MessageModule } from 'primeng/message';
     MultiSelectModule,
     MessagesModule,
     MessageModule,
+    DividerModule,
+    TagModule,
   ],
   bootstrap: [AppComponent],
   declarations: [ AppComponent ],
