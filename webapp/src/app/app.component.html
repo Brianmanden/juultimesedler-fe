@@ -1,8 +1,11 @@
 <div class="p-fluid p-grid p-formgrid">
   <div class="row">
+    <h5>Uge 12</h5>
+  </div>
+  <div class="row">
     <div class="p-field p-col-12 p-md-4">
+
       <div class="card">
-        <h5>Uge 12</h5>
         <p-tabView [scrollable]="false">
           <p-tabPanel header="Mandag - d.14.">
 
@@ -21,7 +24,6 @@
                 </ng-template>
               </p-autoComplete>
             </div>
-
             <!-- DIVIDER -->
             <div class="row">
               <p-divider></p-divider>
@@ -37,11 +39,11 @@
                 [timeOnly]="true"
                 [touchUI]="true"
                 [readonlyInput]="true">
-                <ng-template pTemplate="header" let-date>
+                <ng-template pTemplate="footer" let-date>
                   <p-message
-                  [ngStyle]="{ 'display': ( endTime <= startTime ) ? 'block' : 'none' }"
+                  [ngStyle]="{ 'visibility': ( endTime <= startTime ) ? 'visible' : 'hidden' }"
                   severity="warn" text="Starttid skal være før sluttid!"
-                  styleClass="p-mr-2"></p-message>
+                  styleClass="p-mb-2"></p-message>
                 </ng-template>
               </p-calendar>
 
@@ -54,11 +56,11 @@
                 [timeOnly]="true"
                 [touchUI]="true"
                 [readonlyInput]="true">
-                <ng-template pTemplate="header" let-date>
+                <ng-template pTemplate="footer" let-date>
                   <p-message
-                    [ngStyle]="{ 'display': ( endTime <= startTime ) ? 'block' : 'none' }"
+                    [ngStyle]="{ 'visibility': ( endTime <= startTime ) ? 'visible' : 'hidden' }"
                     severity="warn" text="Sluttid skal være efter starttid!"
-                    styleClass="p-mr-2"></p-message>
+                    styleClass="p-mb-2"></p-message>
                 </ng-template>
               </p-calendar>
               <p-message
@@ -114,15 +116,28 @@
         </p-tabPanel>
         
           <p-tabPanel header="Tirsdag">
-            <p>
-              Sed ut perspiciatis unde omnis iste natus error sit voluptatem
-              accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab
-              illo inventore veritatis et quasi architecto beatae vitae dicta sunt
-              explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut
-              odit aut fugit, sed quia consequuntur magni dolores eos qui ratione
-              voluptatem sequi nesciunt. Consectetur, adipisci velit, sed quia non
-              numquam eius modi.
-            </p>
+            <div class="row">
+              <label>Projekt</label>
+              <p-autoComplete
+                [(ngModel)]="selectedProjectAdvanced"
+                [suggestions]="filteredProjects"
+                (completeMethod)="filterProject($event)"
+                field="name"
+                [dropdown]="true">
+                <ng-template let-project pTemplate="item">
+                  <div class="project-item">
+                    <div>{{project.name}} - {{project.description}}</div>
+                  </div>
+                </ng-template>
+              </p-autoComplete>
+            </div>
+            <!-- DIVIDER -->
+            <div class="row">
+              <p-divider></p-divider>
+            </div>
+            <div class="row">
+              <h5>Ingen projekter for tirsdag</h5>
+            </div>
           </p-tabPanel>
           <p-tabPanel header="Onsdag">
             <p>
@@ -182,7 +197,6 @@
           
           <!-- DIVIDER -->
           <p-divider></p-divider>
-          
           <!-- SUBMIT BUTTON -->
           <p-button label="Indsend ugeseddel" icon="pi pi-check" iconPos="right"></p-button>
           
