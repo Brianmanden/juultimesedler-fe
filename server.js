@@ -1,8 +1,10 @@
 //Install express server
 // const express = require('express');
-console.log("-1->>>" + express);
+console.log("-1->>>");
 const path = require('path');
 // const app = express();
+
+console.log("-1->>>" + path);
 
 console.log( __dirname+'/src/index.html' );
 
