@@ -5,7 +5,6 @@
     "ng": "ng",
     "start": "node ./server.js",
     "postinstall": "tsc",
-    "bja": "console.log('test')",
     "build": "ng build --prod",
     "watch": "ng build --watch --configuration development",
     "test": "ng test"
@@ -21,6 +20,7 @@
     "@angular/platform-browser": "~13.2.0",
     "@angular/platform-browser-dynamic": "~13.2.0",
     "@angular/router": "~13.2.0",
+    "express": "^4.17.3",
     "primeicons": "^5.0.0",
     "primeng": "^13.1.1",
     "rxjs": "~7.5.0",
@@ -33,6 +33,7 @@
     "@angular/compiler-cli": "~13.2.0",
     "@types/jasmine": "~3.10.0",
     "@types/node": "^12.11.1",
+    "express": "^4.17.3",
     "jasmine-core": "~4.0.0",
     "karma": "~6.3.0",
     "karma-chrome-launcher": "~3.1.0",
