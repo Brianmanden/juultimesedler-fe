@@ -75,7 +75,7 @@ export class AppComponent {
     }
 
     this.filteredProjects = filtered;
-}
+  }
 
   ngOnInit() {
       this.es = {
@@ -192,5 +192,9 @@ export class AppComponent {
     }
 
     this.filteredItems = filtered;
+  }
+
+  public submitTimesheets(event: any) {
+    console.log(event);
   }
 }

@@ -198,7 +198,11 @@
           <!-- DIVIDER -->
           <p-divider></p-divider>
           <!-- SUBMIT BUTTON -->
-          <p-button label="Indsend ugeseddel" icon="pi pi-check" iconPos="right"></p-button>
+          <p-button
+            (click)="submitTimesheets($event)"
+            label="Indsend ugeseddel"
+            icon="pi pi-check"
+            iconPos="right"></p-button>
           
         </p-tabView>
       </div>
