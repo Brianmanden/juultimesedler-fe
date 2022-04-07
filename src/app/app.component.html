@@ -24,52 +24,15 @@
                 </ng-template>
               </p-autoComplete>
             </div>
-            <!-- DIVIDER -->
+            
             <div class="row">
               <p-divider></p-divider>
             </div>
 
             <div class="row">
-              <!-- TIME PICKER STARTTIME -->
-              <label>Starttid</label>
-              <p-calendar
-                [(ngModel)]="startTime"
-                [showTime]="true"
-                [stepMinute]="15"
-                [timeOnly]="true"
-                [touchUI]="true"
-                [readonlyInput]="true">
-                <ng-template pTemplate="footer" let-date>
-                  <p-message
-                  [ngStyle]="{ 'visibility': ( endTime <= startTime ) ? 'visible' : 'hidden' }"
-                  severity="warn" text="Starttid skal være før sluttid!"
-                  styleClass="p-mb-2"></p-message>
-                </ng-template>
-              </p-calendar>
-
-              <!-- TIME PICKER ENDTIME -->
-              <label>Sluttid</label>
-              <p-calendar
-                [(ngModel)]="endTime"
-                [showTime]="true"
-                [stepMinute]="15"
-                [timeOnly]="true"
-                [touchUI]="true"
-                [readonlyInput]="true">
-                <ng-template pTemplate="footer" let-date>
-                  <p-message
-                    [ngStyle]="{ 'visibility': ( endTime <= startTime ) ? 'visible' : 'hidden' }"
-                    severity="warn" text="Sluttid skal være efter starttid!"
-                    styleClass="p-mb-2"></p-message>
-                </ng-template>
-              </p-calendar>
-              <p-message
-                [ngStyle]="{ 'padding-top' : '1rem', 'display': ( endTime <= startTime ) ? 'block' : 'none' }"
-                severity="warn" text="Angiv korrekte tider"
-                styleClass="p-mr-2"></p-message>
+              <app-time-pickers></app-time-pickers>
             </div>
 
-            <!-- DIVIDER -->
             <div class="row">
               <p-divider></p-divider>
             </div>
@@ -94,7 +57,6 @@
               </p-listbox>
             </div>
 
-            <!-- DIVIDER -->
             <div class="row">
               <p-divider></p-divider>
             </div>
@@ -131,13 +93,15 @@
                 </ng-template>
               </p-autoComplete>
             </div>
-            <!-- DIVIDER -->
+
             <div class="row">
               <p-divider></p-divider>
             </div>
+
             <div class="row">
               <h5>Ingen projekter for tirsdag</h5>
             </div>
+
           </p-tabPanel>
           <p-tabPanel header="Onsdag">
             <p>
@@ -195,14 +159,14 @@
             </p>
           </p-tabPanel>
           
-          <!-- DIVIDER -->
           <p-divider></p-divider>
-          <!-- SUBMIT BUTTON -->
+
           <p-button
             (click)="submitTimesheets($event)"
             label="Indsend ugeseddel"
             icon="pi pi-check"
-            iconPos="right"></p-button>
+            iconPos="right">
+          </p-button>
           
         </p-tabView>
       </div>

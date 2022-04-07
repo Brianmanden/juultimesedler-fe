@@ -13,6 +13,7 @@ import { MessagesModule } from 'primeng/messages';
 import { MessageModule } from 'primeng/message';
 import { DividerModule } from 'primeng/divider';
 import { TagModule } from 'primeng/tag';
+import { TimePickersComponent } from './time-pickers/time-pickers.component';
 
 @NgModule({
   imports: [
@@ -31,7 +32,7 @@ import { TagModule } from 'primeng/tag';
     TagModule,
   ],
   bootstrap: [AppComponent],
-  declarations: [ AppComponent ],
+  declarations: [ AppComponent, TimePickersComponent ],
   providers: [],
 })
 export class AppModule { }
