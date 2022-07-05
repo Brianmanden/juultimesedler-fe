@@ -2,6 +2,7 @@ import { __decorate } from "tslib";
 import { Component } from '@angular/core';
 let AppComponent = class AppComponent {
     constructor() {
+        this.rootURI = "https://localhost:44352/api";
         this.results = ["Byg1", "Byg2", "Byg3", "Ombyg1", "Ombyg2"];
         this.title = 'juultimesedler';
         this.items = ["Byg1", "Byg2", "Byg3", "Ombyg1", "Ombyg2", "Ombyg3", "Riv1", "Riv2", "Riv3"];
@@ -131,6 +132,26 @@ let AppComponent = class AppComponent {
             }
         }
         this.filteredItems = filtered;
+    }
+    submitTimesheets(event) {
+        console.log(event);
+
+        const data = { username: 'example' };
+
+        fetch(rootURI + '/test', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(data),
+        })
+        .then(response => response.json())
+        .then(data => {
+          console.log('Success:', data);
+        })
+        .catch((error) => {
+          console.error('Error:', error);
+        });
     }
 };
 AppComponent = __decorate([

@@ -14,6 +14,7 @@ import { MessagesModule } from 'primeng/messages';
 import { MessageModule } from 'primeng/message';
 import { DividerModule } from 'primeng/divider';
 import { TagModule } from 'primeng/tag';
+import { TimePickersComponent } from './time-pickers/time-pickers.component';
 let AppModule = class AppModule {
 };
 AppModule = __decorate([
@@ -34,7 +35,7 @@ AppModule = __decorate([
             TagModule,
         ],
         bootstrap: [AppComponent],
-        declarations: [AppComponent],
+        declarations: [AppComponent, TimePickersComponent],
         providers: [],
     })
 ], AppModule);
