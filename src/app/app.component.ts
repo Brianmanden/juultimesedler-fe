@@ -1,9 +1,5 @@
-import { query } from '@angular/animations';
 import { Component } from '@angular/core';
 import { SelectItemGroup } from 'primeng/api';
-import { MultiSelectModule } from 'primeng/multiselect';
-import { Message } from 'primeng/api';
-import { DividerModule } from 'primeng/divider';
 
 @Component({
   selector: 'app-root',
@@ -19,6 +15,8 @@ export class AppComponent {
   title = 'juultimesedler';
 
   value: Date;
+
+  /* #region PROJECTS */
   items: string[] = [
     'Byg1',
     'Byg2',
@@ -31,8 +29,10 @@ export class AppComponent {
     'Riv3',
   ];
   filteredItems: any[];
+  /* #endregion */
   jobDesc: string;
 
+  /* #region DATES & TIME */
   dateValue: Date;
   dates: Date[];
   date1: Date;
@@ -58,8 +58,9 @@ export class AppComponent {
   minDate: Date;
   maxDate: Date;
   es: any;
+  /* #endregion */
 
-  // PROJECT PICKER
+  /* #region PROJECT PICKER */
   projects: any[] = [
     { name: 'Oslo1', description: 'Komplet riv og byg ny H & M' },
     { name: 'Oslo2', description: 'Ny Loius Vuitton' },
@@ -67,11 +68,13 @@ export class AppComponent {
   ];
   selectedProjectAdvanced: any[];
   filteredProjects: any[];
+  /* #endregion */
 
-  // LISTBOX
+  /* #region LISTBOX */
   selectedTasks: any[];
   definedTasks: SelectItemGroup[];
   //definedTasks: any[];
+  /* #endregion */
 
   filterProject(event: { query: any }) {
     //in a real application, make a request to a remote url with the query and return filtered results, for demo we filter at client side
@@ -89,6 +92,7 @@ export class AppComponent {
   }
 
   ngOnInit() {
+    /* #region DAYS & MONTHS */
     this.es = {
       firstDayOfWeek: 1,
       dayNames: [
@@ -151,6 +155,7 @@ export class AppComponent {
     let invalidDate = new Date();
     invalidDate.setDate(today.getDate() - 1);
     this.invalidDates = [today, invalidDate];
+    /* #endregion */
 
     // this.definedTasks = [
     //   { name: "Rive væg", code: "riveVaeg" },
@@ -162,7 +167,7 @@ export class AppComponent {
     //   { name: "Feje", code: "feje" },
     // ];
 
-    // LISTBOX
+    /* #region LISTBOX */
     this.definedTasks = [
       {
         label: 'GIPS',
@@ -198,6 +203,7 @@ export class AppComponent {
         items: [{ label: 'Afvig01', value: 'afvig01' }],
       },
     ];
+    /* #endregion */
   }
 
   search(event: { query: any }) {
