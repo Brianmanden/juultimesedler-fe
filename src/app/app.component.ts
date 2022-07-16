@@ -57,7 +57,8 @@ export class AppComponent {
   rangeDates: Date[];
   minDate: Date;
   maxDate: Date;
-  es: any;
+  // es: any;
+  en: any;
   /* #endregion */
 
   /* #region PROJECT PICKER */
@@ -93,49 +94,93 @@ export class AppComponent {
 
   ngOnInit() {
     /* #region DAYS & MONTHS */
-    this.es = {
+    // this.es = {
+    //   firstDayOfWeek: 1,
+    //   dayNames: [
+    //     'domingo',
+    //     'lunes',
+    //     'martes',
+    //     'miércoles',
+    //     'jueves',
+    //     'viernes',
+    //     'sábado',
+    //   ],
+    //   dayNamesShort: ['dom', 'lun', 'mar', 'mié', 'jue', 'vie', 'sáb'],
+    //   dayNamesMin: ['D', 'L', 'M', 'X', 'J', 'V', 'S'],
+    //   monthNames: [
+    //     'enero',
+    //     'febrero',
+    //     'marzo',
+    //     'abril',
+    //     'mayo',
+    //     'junio',
+    //     'julio',
+    //     'agosto',
+    //     'septiembre',
+    //     'octubre',
+    //     'noviembre',
+    //     'diciembre',
+    //   ],
+    //   monthNamesShort: [
+    //     'ene',
+    //     'feb',
+    //     'mar',
+    //     'abr',
+    //     'may',
+    //     'jun',
+    //     'jul',
+    //     'ago',
+    //     'sep',
+    //     'oct',
+    //     'nov',
+    //     'dic',
+    //   ],
+    //   today: 'Hoy',
+    //   clear: 'Borrar',
+    // };
+    this.en = {
       firstDayOfWeek: 1,
       dayNames: [
-        'domingo',
-        'lunes',
-        'martes',
-        'miércoles',
-        'jueves',
-        'viernes',
-        'sábado',
+        'Sunday',
+        'Monday',
+        'Tuesday',
+        'Wednesday',
+        'Thursday',
+        'Friday',
+        'Staurday',
       ],
-      dayNamesShort: ['dom', 'lun', 'mar', 'mié', 'jue', 'vie', 'sáb'],
-      dayNamesMin: ['D', 'L', 'M', 'X', 'J', 'V', 'S'],
+      dayNamesShort: ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'],
+      dayNamesMin: ['Su', 'M', 'Tu', 'W', 'Th', 'F', 'Sa'],
       monthNames: [
-        'enero',
-        'febrero',
-        'marzo',
-        'abril',
-        'mayo',
-        'junio',
-        'julio',
-        'agosto',
-        'septiembre',
-        'octubre',
-        'noviembre',
-        'diciembre',
+        'January',
+        'February',
+        'March',
+        'April',
+        'May',
+        'June',
+        'July',
+        'August',
+        'September',
+        'October',
+        'November',
+        'December',
       ],
       monthNamesShort: [
-        'ene',
-        'feb',
-        'mar',
-        'abr',
-        'may',
-        'jun',
-        'jul',
-        'ago',
-        'sep',
-        'oct',
-        'nov',
-        'dic',
+        'Jan',
+        'Feb',
+        'Mar',
+        'Apr',
+        'May',
+        'Jun',
+        'Jul',
+        'Aug',
+        'Sep',
+        'Oct',
+        'Nov',
+        'Dec',
       ],
-      today: 'Hoy',
-      clear: 'Borrar',
+      today: 'Today',
+      clear: 'Clear',
     };
 
     let today = new Date();
@@ -244,7 +289,7 @@ export class AppComponent {
   }
 
   public submitTimesheets(event: any) {
-    console.log(event);
+    console.log('-1-', event);
 
     const data = { username: 'example' };
 
