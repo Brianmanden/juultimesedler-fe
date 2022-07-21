@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { SelectItemGroup } from 'primeng/api';
+import { timesheetDTO } from './DTO/timesheetDTO';
 
 @Component({
   selector: 'app-root',
@@ -7,7 +8,8 @@ import { SelectItemGroup } from 'primeng/api';
   styleUrls: ['./app.component.css'],
 })
 export class AppComponent {
-  rootURI: string = 'https://localhost:44352/api';
+  // rootURI: string = 'https://localhost:44352/api';
+  rootURI: string = 'https://localhost:44352/api/projects/1098';
 
   results: string[] = ['Byg1', 'Byg2', 'Byg3', 'Ombyg1', 'Ombyg2'];
   showButtonBar: boolean;
@@ -67,7 +69,7 @@ export class AppComponent {
     { name: 'Oslo2', description: 'Ny Loius Vuitton' },
     { name: 'Gardamoen', description: 'Renovation Gardamoen' },
   ];
-  selectedProjectAdvanced: any[];
+  selectedProjectAdvanced: string;
   filteredProjects: any[];
   /* #endregion */
 
@@ -94,50 +96,6 @@ export class AppComponent {
 
   ngOnInit() {
     /* #region DAYS & MONTHS */
-    // this.es = {
-    //   firstDayOfWeek: 1,
-    //   dayNames: [
-    //     'domingo',
-    //     'lunes',
-    //     'martes',
-    //     'miércoles',
-    //     'jueves',
-    //     'viernes',
-    //     'sábado',
-    //   ],
-    //   dayNamesShort: ['dom', 'lun', 'mar', 'mié', 'jue', 'vie', 'sáb'],
-    //   dayNamesMin: ['D', 'L', 'M', 'X', 'J', 'V', 'S'],
-    //   monthNames: [
-    //     'enero',
-    //     'febrero',
-    //     'marzo',
-    //     'abril',
-    //     'mayo',
-    //     'junio',
-    //     'julio',
-    //     'agosto',
-    //     'septiembre',
-    //     'octubre',
-    //     'noviembre',
-    //     'diciembre',
-    //   ],
-    //   monthNamesShort: [
-    //     'ene',
-    //     'feb',
-    //     'mar',
-    //     'abr',
-    //     'may',
-    //     'jun',
-    //     'jul',
-    //     'ago',
-    //     'sep',
-    //     'oct',
-    //     'nov',
-    //     'dic',
-    //   ],
-    //   today: 'Hoy',
-    //   clear: 'Borrar',
-    // };
     this.en = {
       firstDayOfWeek: 1,
       dayNames: [
@@ -290,15 +248,22 @@ export class AppComponent {
 
   public submitTimesheets(event: any) {
     console.log('-1-', event);
+    console.log('-2-', this);
 
-    const data = { username: 'example' };
+    const data = new timesheetDTO();
+    data.selectedProjectAdvanced = this.selectedProjectAdvanced;
+    data.selectedTasks = this.selectedTasks;
+    data.startTime = this.startTime.toDateString();
+    data.endTime = this.endTime.toDateString();
+    data.jobDesc = this.jobDesc;
 
-    fetch(this.rootURI + '/test', {
-      method: 'POST',
+    fetch(this.rootURI, {
+      // method: 'POST',
+      method: 'GET',
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify(data),
+      // body: JSON.stringify(data),
     })
       .then((response) => response.json())
       .then((data) => {
