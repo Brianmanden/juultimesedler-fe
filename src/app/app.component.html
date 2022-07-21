@@ -4,11 +4,9 @@
   </div>
   <div class="row">
     <div class="p-field p-col-12 p-md-4">
-
       <div class="card">
         <p-tabView [scrollable]="false">
           <p-tabPanel header="Mandag - d.14.">
-
             <div class="row">
               <label>Projekt</label>
               <p-autoComplete
@@ -16,15 +14,16 @@
                 [suggestions]="filteredProjects"
                 (completeMethod)="filterProject($event)"
                 field="name"
-                [dropdown]="true">
+                [dropdown]="true"
+              >
                 <ng-template let-project pTemplate="item">
                   <div class="project-item">
-                    <div>{{project.name}} - {{project.description}}</div>
+                    <div>{{ project.name }} - {{ project.description }}</div>
                   </div>
                 </ng-template>
               </p-autoComplete>
             </div>
-            
+
             <div class="row">
               <p-divider></p-divider>
             </div>
@@ -48,10 +47,11 @@
                 [checkbox]="true"
                 [filter]="true"
                 [multiple]="true"
-                [listStyle]="{'max-height':'1250px'}">
+                [listStyle]="{ 'max-height': '1250px' }"
+              >
                 <ng-template let-group pTemplate="group">
                   <div class="p-d-flex p-ai-center">
-                    <span>{{group.label}}</span>
+                    <span>{{ group.label }}</span>
                   </div>
                 </ng-template>
               </p-listbox>
@@ -60,23 +60,23 @@
             <div class="row">
               <p-divider></p-divider>
             </div>
-          
+
             <!-- TEXTAREA -->
             <div class="row">
-              <label>Liste over opgaver</label>
+              <label>Kommentarer</label>
               <textarea
                 [(ngModel)]="jobDesc"
                 id="float-input"
                 rows="5"
                 cols="30"
                 pinputtextarea=""
-                class="p-inputtextarea p-inputtext p-component p-element">
+                class="p-inputtextarea p-inputtext p-component p-element"
+              >
               </textarea>
               <label for="float-input">Udførte opgaver</label>
             </div>
+          </p-tabPanel>
 
-        </p-tabPanel>
-        
           <p-tabPanel header="Tirsdag">
             <div class="row">
               <label>Projekt</label>
@@ -85,10 +85,11 @@
                 [suggestions]="filteredProjects"
                 (completeMethod)="filterProject($event)"
                 field="name"
-                [dropdown]="true">
+                [dropdown]="true"
+              >
                 <ng-template let-project pTemplate="item">
                   <div class="project-item">
-                    <div>{{project.name}} - {{project.description}}</div>
+                    <div>{{ project.name }} - {{ project.description }}</div>
                   </div>
                 </ng-template>
               </p-autoComplete>
@@ -101,79 +102,74 @@
             <div class="row">
               <h5>Ingen projekter for tirsdag</h5>
             </div>
-
           </p-tabPanel>
           <p-tabPanel header="Onsdag">
             <p>
               At vero eos et accusamus et iusto odio dignissimos ducimus qui
-              blanditiis praesentium voluptatum deleniti atque corrupti quos dolores
-              et quas molestias excepturi sint occaecati cupiditate non provident,
-              similique sunt in culpa qui officia deserunt mollitia animi, id est
-              laborum et dolorum fuga. Et harum quidem rerum facilis est et expedita
-              distinctio. Nam libero tempore, cum soluta nobis est eligendi optio
-              cumque nihil impedit quo minus.
+              blanditiis praesentium voluptatum deleniti atque corrupti quos
+              dolores et quas molestias excepturi sint occaecati cupiditate non
+              provident, similique sunt in culpa qui officia deserunt mollitia
+              animi, id est laborum et dolorum fuga. Et harum quidem rerum
+              facilis est et expedita distinctio. Nam libero tempore, cum soluta
+              nobis est eligendi optio cumque nihil impedit quo minus.
             </p>
           </p-tabPanel>
           <p-tabPanel header="Torsdag">
             <p>
               Sed ut perspiciatis unde omnis iste natus error sit voluptatem
-              accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab
-              illo inventore veritatis et quasi architecto beatae vitae dicta sunt
-              explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut
-              odit aut fugit, sed quia consequuntur magni dolores eos qui ratione
-              voluptatem sequi nesciunt. Consectetur, adipisci velit, sed quia non
-              numquam eius modi.
+              accusantium doloremque laudantium, totam rem aperiam, eaque ipsa
+              quae ab illo inventore veritatis et quasi architecto beatae vitae
+              dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit
+              aspernatur aut odit aut fugit, sed quia consequuntur magni dolores
+              eos qui ratione voluptatem sequi nesciunt. Consectetur, adipisci
+              velit, sed quia non numquam eius modi.
             </p>
           </p-tabPanel>
           <p-tabPanel header="Fredag">
             <p>
               At vero eos et accusamus et iusto odio dignissimos ducimus qui
-              blanditiis praesentium voluptatum deleniti atque corrupti quos dolores
-              et quas molestias excepturi sint occaecati cupiditate non provident,
-              similique sunt in culpa qui officia deserunt mollitia animi, id est
-              laborum et dolorum fuga. Et harum quidem rerum facilis est et expedita
-              distinctio. Nam libero tempore, cum soluta nobis est eligendi optio
-              cumque nihil impedit quo minus.
+              blanditiis praesentium voluptatum deleniti atque corrupti quos
+              dolores et quas molestias excepturi sint occaecati cupiditate non
+              provident, similique sunt in culpa qui officia deserunt mollitia
+              animi, id est laborum et dolorum fuga. Et harum quidem rerum
+              facilis est et expedita distinctio. Nam libero tempore, cum soluta
+              nobis est eligendi optio cumque nihil impedit quo minus.
             </p>
           </p-tabPanel>
           <p-tabPanel header="Lørdag">
             <p>
               Sed ut perspiciatis unde omnis iste natus error sit voluptatem
-              accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab
-              illo inventore veritatis et quasi architecto beatae vitae dicta sunt
-              explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut
-              odit aut fugit, sed quia consequuntur magni dolores eos qui ratione
-              voluptatem sequi nesciunt. Consectetur, adipisci velit, sed quia non
-              numquam eius modi.
+              accusantium doloremque laudantium, totam rem aperiam, eaque ipsa
+              quae ab illo inventore veritatis et quasi architecto beatae vitae
+              dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit
+              aspernatur aut odit aut fugit, sed quia consequuntur magni dolores
+              eos qui ratione voluptatem sequi nesciunt. Consectetur, adipisci
+              velit, sed quia non numquam eius modi.
             </p>
           </p-tabPanel>
           <p-tabPanel header="Søndag">
             <p>
               At vero eos et accusamus et iusto odio dignissimos ducimus qui
-              blanditiis praesentium voluptatum deleniti atque corrupti quos dolores
-              et quas molestias excepturi sint occaecati cupiditate non provident,
-              similique sunt in culpa qui officia deserunt mollitia animi, id est
-              laborum et dolorum fuga. Et harum quidem rerum facilis est et expedita
-              distinctio. Nam libero tempore, cum soluta nobis est eligendi optio
-              cumque nihil impedit quo minus.
+              blanditiis praesentium voluptatum deleniti atque corrupti quos
+              dolores et quas molestias excepturi sint occaecati cupiditate non
+              provident, similique sunt in culpa qui officia deserunt mollitia
+              animi, id est laborum et dolorum fuga. Et harum quidem rerum
+              facilis est et expedita distinctio. Nam libero tempore, cum soluta
+              nobis est eligendi optio cumque nihil impedit quo minus.
             </p>
           </p-tabPanel>
-          
+
           <p-divider></p-divider>
 
           <p-button
             (click)="submitTimesheets($event)"
             label="Indsend ugeseddel"
             icon="pi pi-check"
-            iconPos="right">
+            iconPos="right"
+          >
           </p-button>
-          
         </p-tabView>
       </div>
     </div>
   </div>
-  
-  
 </div>
-
-
