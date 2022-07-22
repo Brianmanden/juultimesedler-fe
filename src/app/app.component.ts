@@ -8,8 +8,7 @@ import { timesheetDTO } from './DTO/timesheetDTO';
   styleUrls: ['./app.component.css'],
 })
 export class AppComponent {
-  // rootURI: string = 'https://localhost:44352/api';
-  rootURI: string = 'https://localhost:44352/api/projects/1098';
+  rootURI: string = 'https://localhost:44352/api';
 
   results: string[] = ['Byg1', 'Byg2', 'Byg3', 'Ombyg1', 'Ombyg2'];
   showButtonBar: boolean;
@@ -257,7 +256,8 @@ export class AppComponent {
     data.endTime = this.endTime.toDateString();
     data.jobDesc = this.jobDesc;
 
-    fetch(this.rootURI, {
+    // fetch(this.rootURI + '/projects/1098', {
+    fetch(this.rootURI + '/test', {
       // method: 'POST',
       method: 'GET',
       headers: {
