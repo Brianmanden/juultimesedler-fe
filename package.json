@@ -7,7 +7,7 @@
   },
   "scripts": {
     "ng": "ng",
-    "start": "ng serve --host 0.0.0.0 --disable-host-check --ssl",
+    "start": "ng serve --host 0.0.0.0 --disable-host-check",
     "postinstall": "tsc",
     "build": "ng build --prod",
     "watch": "ng build --watch --configuration development",
