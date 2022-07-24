@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { SelectItemGroup } from 'primeng/api';
 import { timesheetDTO } from './DTO/timesheetDTO';
+import { getProjectDTO } from './DTO/getProjectDTO';
 
 @Component({
   selector: 'app-root',
@@ -63,13 +64,14 @@ export class AppComponent {
   /* #endregion */
 
   /* #region PROJECT PICKER */
-  projects: any[] = [
-    { name: 'Oslo1', description: 'Komplet riv og byg ny H & M' },
-    { name: 'Oslo2', description: 'Ny Loius Vuitton' },
-    { name: 'Gardamoen', description: 'Renovation Gardamoen' },
-  ];
+  projects: any[] = [];
+  // projects: any[] = [
+  //   { name: 'Oslo1', description: 'Komplet riv og byg ny H & M' },
+  //   { name: 'Oslo2', description: 'Ny Loius Vuitton' },
+  //   { name: 'Gardamoen', description: 'Renovation Gardamoen' },
+  // ];
   selectedProjectAdvanced: string;
-  filteredProjects: any[];
+  filteredProjects: getProjectDTO[];
   /* #endregion */
 
   /* #region LISTBOX */
@@ -83,6 +85,15 @@ export class AppComponent {
     let filtered: any[] = [];
     let query = event.query;
 
+    // for (let i = 0; i < this.projects.length; i++) {
+    //   let project = this.projects[i];
+    //   if (
+    //     project.projectName?.toLowerCase().indexOf(query.toLowerCase()) == 0
+    //   ) {
+    //     filtered.push(project);
+    //   }
+    // }
+
     for (let i = 0; i < this.projects.length; i++) {
       let project = this.projects[i];
       if (project.name.toLowerCase().indexOf(query.toLowerCase()) == 0) {
@@ -94,6 +105,37 @@ export class AppComponent {
   }
 
   ngOnInit() {
+    /* #region FETCH PROJECTS */
+    fetch(this.rootURI + '/projects/' + '1110', {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        console.log('Projects:', data);
+        data.forEach((item: getProjectDTO) => {
+          console.log(item);
+          // let project: getProjectDTO = {
+          //   projectId: item.projectId,
+          //   projectName: item.projectName,
+          //   projectFullName: item.projectFullName,
+          // };
+          this.projects.push({
+            name: item.projectName,
+            description: item.projectFullName,
+          });
+        });
+      })
+      .catch((error) => {
+        console.error('Error:', error);
+      })
+      .finally(() => {
+        console.log('Finally - projects: ' + this.projects);
+      });
+    /* #endregion */
+
     /* #region DAYS & MONTHS */
     this.en = {
       firstDayOfWeek: 1,
@@ -139,7 +181,9 @@ export class AppComponent {
       today: 'Today',
       clear: 'Clear',
     };
+    /* #endregion */
 
+    /* #region TIME VARIABLES */
     let today = new Date();
     let month = today.getMonth();
     let year = today.getFullYear();
