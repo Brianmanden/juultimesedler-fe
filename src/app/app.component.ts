@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import { SelectItemGroup } from 'primeng/api';
 import { timesheetDTO } from './DTO/timesheetDTO';
 import { getProjectDTO } from './DTO/getProjectDTO';
+import { ProjectService } from './project.service';
+import { ProjectPickerModel } from './Models/project-picker-model.model';
 
 @Component({
   selector: 'app-root',
@@ -9,7 +11,8 @@ import { getProjectDTO } from './DTO/getProjectDTO';
   styleUrls: ['./app.component.css'],
 })
 export class AppComponent {
-  rootURI: string = 'https://localhost:44352/api';
+  APIrootURI: string = 'https://localhost:44352/api';
+  workerId: number = 1110;
 
   results: string[] = ['Byg1', 'Byg2', 'Byg3', 'Ombyg1', 'Ombyg2'];
   showButtonBar: boolean;
@@ -64,7 +67,7 @@ export class AppComponent {
   /* #endregion */
 
   /* #region PROJECT PICKER */
-  projects: any[] = [];
+  projects: ProjectPickerModel[] = [];
   // projects: any[] = [
   //   { name: 'Oslo1', description: 'Komplet riv og byg ny H & M' },
   //   { name: 'Oslo2', description: 'Ny Loius Vuitton' },
@@ -79,6 +82,8 @@ export class AppComponent {
   definedTasks: SelectItemGroup[];
   //definedTasks: any[];
   /* #endregion */
+
+  constructor(private projectService: ProjectService) {}
 
   filterProject(event: { query: any }) {
     //in a real application, make a request to a remote url with the query and return filtered results, for demo we filter at client side
@@ -96,7 +101,7 @@ export class AppComponent {
 
     for (let i = 0; i < this.projects.length; i++) {
       let project = this.projects[i];
-      if (project.name.toLowerCase().indexOf(query.toLowerCase()) == 0) {
+      if (project.name?.toLowerCase().indexOf(query.toLowerCase()) == 0) {
         filtered.push(project);
       }
     }
@@ -105,36 +110,10 @@ export class AppComponent {
   }
 
   ngOnInit() {
-    /* #region FETCH PROJECTS */
-    fetch(this.rootURI + '/projects/' + '1110', {
-      method: 'GET',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    })
-      .then((response) => response.json())
-      .then((data) => {
-        console.log('Projects:', data);
-        data.forEach((item: getProjectDTO) => {
-          console.log(item);
-          // let project: getProjectDTO = {
-          //   projectId: item.projectId,
-          //   projectName: item.projectName,
-          //   projectFullName: item.projectFullName,
-          // };
-          this.projects.push({
-            name: item.projectName,
-            description: item.projectFullName,
-          });
-        });
-      })
-      .catch((error) => {
-        console.error('Error:', error);
-      })
-      .finally(() => {
-        console.log('Finally - projects: ' + this.projects);
-      });
-    /* #endregion */
+    this.projects = this.projectService.getProjects(
+      this.APIrootURI,
+      this.workerId
+    );
 
     /* #region DAYS & MONTHS */
     this.en = {
@@ -300,8 +279,8 @@ export class AppComponent {
     data.endTime = this.endTime.toDateString();
     data.jobDesc = this.jobDesc;
 
-    // fetch(this.rootURI + '/projects/1098', {
-    fetch(this.rootURI + '/test', {
+    // fetch(this.APIrootURI + '/projects/1098', {
+    fetch(this.APIrootURI + '/test', {
       // method: 'POST',
       method: 'GET',
       headers: {
