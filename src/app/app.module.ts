@@ -1,9 +1,10 @@
-import { AppComponent }   from './app.component';
+import { NgModule } from '@angular/core';
+import { BrowserModule } from '@angular/platform-browser';
+import { HttpClientModule } from '@angular/common/http';
+import { AppComponent } from './app.component';
 import { CalendarModule } from 'primeng/calendar';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
-import { NgModule } from '@angular/core';
 import { TabViewModule } from 'primeng/tabview';
 import { InputTextModule } from 'primeng/inputtext';
 import { ListboxModule } from 'primeng/listbox';
@@ -14,6 +15,12 @@ import { MessageModule } from 'primeng/message';
 import { DividerModule } from 'primeng/divider';
 import { TagModule } from 'primeng/tag';
 import { TimePickersComponent } from './time-pickers/time-pickers.component';
+import { HttpErrorHandler } from './http-error-handler.service';
+import { MessageService } from 'primeng/api';
+import { MyMessageService } from './message.service';
+
+import { ProjectsService } from './project.service';
+// import { ProjectsService } from './project.service';
 
 @NgModule({
   imports: [
@@ -30,9 +37,15 @@ import { TimePickersComponent } from './time-pickers/time-pickers.component';
     MessageModule,
     DividerModule,
     TagModule,
+    HttpClientModule,
+  ],
+  declarations: [AppComponent, TimePickersComponent],
+  providers: [
+    HttpErrorHandler,
+    ProjectsService,
+    MessageService,
+    MyMessageService,
   ],
   bootstrap: [AppComponent],
-  declarations: [ AppComponent, TimePickersComponent ],
-  providers: [],
 })
-export class AppModule { }
+export class AppModule {}

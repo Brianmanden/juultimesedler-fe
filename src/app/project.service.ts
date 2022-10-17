@@ -1,19 +1,44 @@
 import { Injectable } from '@angular/core';
-import { getProjectDTO } from './DTO/getProjectDTO';
-import { ProjectPickerModel } from './Models/project-picker-model.model';
+import { HttpClient } from '@angular/common/http';
+import { HttpHeaders } from '@angular/common/http';
 
-@Injectable({
-  providedIn: 'root',
-})
-export class ProjectService {
-  constructor() {}
+import { ConfigService } from './config/config.service';
+import { Observable } from 'rxjs';
+import { catchError } from 'rxjs/operators';
+import {
+  HttpErrorHandler,
+  HandleError,
+} from '../app/http-error-handler.service';
+
+import { ProjectPickerModel } from './Models/project-picker-model.model';
+import { getProjectDTO } from './DTO/getProjectDTO';
+import { timesheetDTO } from './DTO/timesheetDTO';
+
+const httpOptions = {
+  headers: new HttpHeaders({
+    'Content-Type': 'application/json',
+    Authorization: 'my-auth-token',
+  }),
+};
+
+@Injectable()
+export class ProjectsService {
+  projectsUrl: string = 'api/projects';
+  private handleError: HandleError;
+
+  constructor(private http: HttpClient, httpErrorHandler: HttpErrorHandler) {
+    this.handleError = httpErrorHandler.createHandleError('ProjectsService');
+  }
 
   getProjects(APIrootURI: string, workerId: number): ProjectPickerModel[] {
     let returnList: ProjectPickerModel[] = [];
 
     fetch(APIrootURI + '/projects/' + '1110', {
       method: 'GET',
-      headers: { 'Content-Type': 'application/json' },
+      headers: {
+        'Content-Type': 'application/json',
+        'Access-Control-Allow-Origin': 'QWEQWE',
+      },
     })
       .then((response) => response.json())
       .then((data) => {
@@ -34,5 +59,16 @@ export class ProjectService {
       });
 
     return returnList;
+  }
+
+  postProject(
+    postProjectURI: string,
+    data: timesheetDTO
+  ): Observable<timesheetDTO> {
+    console.log(postProjectURI, data);
+
+    return this.http
+      .post<timesheetDTO>(postProjectURI, data, httpOptions)
+      .pipe(catchError(this.handleError('postProject', data)));
   }
 }

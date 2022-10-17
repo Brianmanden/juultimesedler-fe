@@ -1,5 +1,5 @@
 export class timesheetDTO {
-  selectedProjectAdvanced: string;
+  selectedProjectId: number;
   selectedTasks: string[];
   startTime: string;
   endTime: string;

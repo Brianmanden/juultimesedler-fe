@@ -1,8 +1,16 @@
+import { HttpClient } from '@angular/common/http';
+import { HttpHeaders } from '@angular/common/http';
+import { catchError } from 'rxjs/operators';
+import {
+  HttpErrorHandler,
+  HandleError,
+} from '../app/http-error-handler.service';
+
 import { Component } from '@angular/core';
 import { SelectItemGroup } from 'primeng/api';
 import { timesheetDTO } from './DTO/timesheetDTO';
 import { getProjectDTO } from './DTO/getProjectDTO';
-import { ProjectService } from './project.service';
+import { ProjectsService } from './project.service';
 import { ProjectPickerModel } from './Models/project-picker-model.model';
 
 @Component({
@@ -11,6 +19,8 @@ import { ProjectPickerModel } from './Models/project-picker-model.model';
   styleUrls: ['./app.component.css'],
 })
 export class AppComponent {
+  private handleError: HandleError;
+
   APIrootURI: string = 'https://localhost:44352/api';
   workerId: number = 1110;
 
@@ -73,7 +83,7 @@ export class AppComponent {
   //   { name: 'Oslo2', description: 'Ny Loius Vuitton' },
   //   { name: 'Gardamoen', description: 'Renovation Gardamoen' },
   // ];
-  selectedProjectAdvanced: string;
+  selectedProjectAdvanced: number;
   filteredProjects: getProjectDTO[];
   /* #endregion */
 
@@ -83,21 +93,22 @@ export class AppComponent {
   //definedTasks: any[];
   /* #endregion */
 
-  constructor(private projectService: ProjectService) {}
+  // constructor(
+  //   private projectsService: ProjectsService,
+  //   private http: HttpClient
+  // ) {}
+  constructor(
+    private projectsService: ProjectsService,
+    private http: HttpClient,
+    httpErrorHandler: HttpErrorHandler
+  ) {
+    this.handleError = httpErrorHandler.createHandleError('ProjectsService');
+  }
 
   filterProject(event: { query: any }) {
     //in a real application, make a request to a remote url with the query and return filtered results, for demo we filter at client side
     let filtered: any[] = [];
     let query = event.query;
-
-    // for (let i = 0; i < this.projects.length; i++) {
-    //   let project = this.projects[i];
-    //   if (
-    //     project.projectName?.toLowerCase().indexOf(query.toLowerCase()) == 0
-    //   ) {
-    //     filtered.push(project);
-    //   }
-    // }
 
     for (let i = 0; i < this.projects.length; i++) {
       let project = this.projects[i];
@@ -110,7 +121,7 @@ export class AppComponent {
   }
 
   ngOnInit() {
-    this.projects = this.projectService.getProjects(
+    this.projects = this.projectsService.getProjects(
       this.APIrootURI,
       this.workerId
     );
@@ -181,16 +192,6 @@ export class AppComponent {
     invalidDate.setDate(today.getDate() - 1);
     this.invalidDates = [today, invalidDate];
     /* #endregion */
-
-    // this.definedTasks = [
-    //   { name: "Rive væg", code: "riveVaeg" },
-    //   { name: "Slæbe gips", code: "slæbeGips" },
-    //   { name: "Montere vinkler", code: "montereVinkler" },
-    //   { name: "Montere gips", code: "montereGips" },
-    //   { name: "Spartle gips", code: "spartleGips" },
-    //   { name: "Rydde op", code: "ryddeOp" },
-    //   { name: "Feje", code: "feje" },
-    // ];
 
     /* #region LISTBOX */
     this.definedTasks = [
@@ -268,32 +269,32 @@ export class AppComponent {
     this.filteredItems = filtered;
   }
 
-  public submitTimesheets(event: any) {
+  submitTimesheets(event: any): void {
     console.log('-1-', event);
     console.log('-2-', this);
 
-    const data = new timesheetDTO();
-    data.selectedProjectAdvanced = this.selectedProjectAdvanced;
+    const data: timesheetDTO = new timesheetDTO();
+    data.selectedProjectId = 1115; //this.selectedProjectAdvanced;
     data.selectedTasks = this.selectedTasks;
     data.startTime = this.startTime.toDateString();
     data.endTime = this.endTime.toDateString();
     data.jobDesc = this.jobDesc;
 
-    // fetch(this.APIrootURI + '/projects/1098', {
-    fetch(this.APIrootURI + '/test', {
-      // method: 'POST',
-      method: 'GET',
-      headers: {
+    const httpOptions = {
+      headers: new HttpHeaders({
         'Content-Type': 'application/json',
+        Authorization: 'my-auth-token',
+      }),
+    };
+
+    // this.projectsService.postProject(this.APIrootURI + '/projects', data);
+    this.http.post<any>(this.APIrootURI + '/projects', data).subscribe({
+      next: (data) => {
+        console.log(data);
       },
-      // body: JSON.stringify(data),
-    })
-      .then((response) => response.json())
-      .then((data) => {
-        console.log('Success:', data);
-      })
-      .catch((error) => {
-        console.error('Error:', error);
-      });
+      error: (error) => {
+        console.error('There was an error!', error);
+      },
+    });
   }
 }
