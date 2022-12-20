@@ -43,7 +43,7 @@ export class ProjectsService {
       .then((response) => response.json())
       .then((data) => {
         data.forEach((item: getProjectDTO) => {
-          console.log(item);
+          console.log("-getProjectDTO-", item);
           returnList.push({
             id: item.projectId,
             name: item.projectName,
