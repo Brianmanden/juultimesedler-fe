@@ -1,6 +1,5 @@
 import { HttpClient } from '@angular/common/http';
 import { HttpHeaders } from '@angular/common/http';
-import { catchError } from 'rxjs/operators';
 import {
   HttpErrorHandler,
   HandleError,
@@ -78,11 +77,6 @@ export class AppComponent {
 
   /* #region PROJECT PICKER */
   projects: ProjectPickerModel[] = [];
-  // projects: any[] = [
-  //   { name: 'Oslo1', description: 'Komplet riv og byg ny H & M' },
-  //   { name: 'Oslo2', description: 'Ny Loius Vuitton' },
-  //   { name: 'Gardamoen', description: 'Renovation Gardamoen' },
-  // ];
   selectedProjectAdvanced: number;
   filteredProjects: getProjectDTO[];
   /* #endregion */
@@ -90,13 +84,8 @@ export class AppComponent {
   /* #region LISTBOX */
   selectedTasks: any[];
   definedTasks: SelectItemGroup[];
-  //definedTasks: any[];
   /* #endregion */
 
-  // constructor(
-  //   private projectsService: ProjectsService,
-  //   private http: HttpClient
-  // ) {}
   constructor(
     private projectsService: ProjectsService,
     private http: HttpClient,
@@ -270,9 +259,6 @@ export class AppComponent {
   }
 
   submitTimesheets(event: any): void {
-    console.log('-1-', event);
-    console.log('-2-', this);
-
     const data: timesheetDTO = new timesheetDTO();
     data.selectedProjectId = 1115; //this.selectedProjectAdvanced;
     data.selectedTasks = this.selectedTasks;
@@ -287,10 +273,9 @@ export class AppComponent {
       }),
     };
 
-    // this.projectsService.postProject(this.APIrootURI + '/projects', data);
-    this.http.post<any>(this.APIrootURI + '/projects', data).subscribe({
+    this.http.post<string>(this.APIrootURI + '/projects', data).subscribe({
       next: (data) => {
-        console.log(data);
+        console.log('-next-', data);
       },
       error: (error) => {
         console.error('There was an error!', error);
