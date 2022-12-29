@@ -30,20 +30,21 @@ export class ProjectsService {
     this.handleError = httpErrorHandler.createHandleError('ProjectsService');
   }
 
-  getProjects(APIrootURI: string, workerId: number): ProjectPickerModel[] {
+  getCurrentProjects(APIrootURI: string): ProjectPickerModel[] {
     let returnList: ProjectPickerModel[] = [];
 
-    fetch(APIrootURI + '/projects/' + '1110', {
+    fetch(APIrootURI + '/projects/', {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
+        // TODO Fix / remove / ignore Access-Control-Allow-Origin
         'Access-Control-Allow-Origin': 'QWEQWE',
       },
     })
       .then((response) => response.json())
       .then((data) => {
         data.forEach((item: getProjectDTO) => {
-          console.log("-getProjectDTO-", item);
+          console.log('-getProjectDTO-', item);
           returnList.push({
             id: item.projectId,
             name: item.projectName,

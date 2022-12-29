@@ -110,10 +110,7 @@ export class AppComponent {
   }
 
   ngOnInit() {
-    this.projects = this.projectsService.getProjects(
-      this.APIrootURI,
-      this.workerId
-    );
+    this.projects = this.projectsService.getCurrentProjects(this.APIrootURI);
 
     /* #region DAYS & MONTHS */
     this.en = {
