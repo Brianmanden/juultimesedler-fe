@@ -11,8 +11,8 @@ import {
 } from '../app/http-error-handler.service';
 
 import { ProjectPickerModel } from './Models/project-picker-model.model';
-import { getProjectDTO } from './DTO/getProjectDTO';
-import { timesheetDTO } from './DTO/timesheetDTO';
+import { getProjectDTO } from './DTOs/getProjectDTO';
+import { timesheetDTO } from './DTOs/timesheetDTO';
 
 const httpOptions = {
   headers: new HttpHeaders({

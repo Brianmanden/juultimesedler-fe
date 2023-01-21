@@ -7,8 +7,8 @@ import {
 
 import { Component } from '@angular/core';
 import { SelectItemGroup } from 'primeng/api';
-import { timesheetDTO } from './DTO/timesheetDTO';
-import { getProjectDTO } from './DTO/getProjectDTO';
+import { timesheetDTO } from './DTOs/timesheetDTO';
+import { getProjectDTO } from './DTOs/getProjectDTO';
 import { ProjectsService } from './project.service';
 import { ProjectPickerModel } from './Models/project-picker-model.model';
 
