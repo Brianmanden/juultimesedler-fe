@@ -180,6 +180,9 @@ export class AppComponent {
     /* #endregion */
 
     /* #region LISTBOX */
+    /* HERTIL BJA
+      Oprette service til at hente task list og læg resultatet på definedTasks listen
+    */
     this.definedTasks = [
       {
         label: 'GIPS',
