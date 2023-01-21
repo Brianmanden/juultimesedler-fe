@@ -2,17 +2,14 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { HttpHeaders } from '@angular/common/http';
 
-import { ConfigService } from './config/config.service';
+import { ConfigService } from '../config/config.service';
 import { Observable } from 'rxjs';
 import { catchError } from 'rxjs/operators';
-import {
-  HttpErrorHandler,
-  HandleError,
-} from '../app/http-error-handler.service';
+import { HttpErrorHandler, HandleError } from './http-error-handler.service';
 
-import { ProjectPickerModel } from './Models/project-picker-model.model';
-import { getProjectDTO } from './DTOs/getProjectDTO';
-import { timesheetDTO } from './DTOs/timesheetDTO';
+import { ProjectPickerModel } from '../Models/project-picker-model.model';
+import { getProjectDTO } from '../DTOs/getProjectDTO';
+import { timesheetDTO } from '../DTOs/timesheetDTO';
 
 const httpOptions = {
   headers: new HttpHeaders({

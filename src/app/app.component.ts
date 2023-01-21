@@ -3,13 +3,13 @@ import { HttpHeaders } from '@angular/common/http';
 import {
   HttpErrorHandler,
   HandleError,
-} from '../app/http-error-handler.service';
+} from './Services/http-error-handler.service';
 
 import { Component } from '@angular/core';
 import { SelectItemGroup } from 'primeng/api';
 import { timesheetDTO } from './DTOs/timesheetDTO';
 import { getProjectDTO } from './DTOs/getProjectDTO';
-import { ProjectsService } from './project.service';
+import { ProjectsService } from './Services/project.service';
 import { ProjectPickerModel } from './Models/project-picker-model.model';
 
 @Component({
