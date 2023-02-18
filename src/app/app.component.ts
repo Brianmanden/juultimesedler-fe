@@ -4,12 +4,12 @@ import {
   HttpErrorHandler,
   HandleError,
 } from './Services/http-error-handler.service';
-
 import { Component } from '@angular/core';
 import { SelectItemGroup } from 'primeng/api';
 import { timesheetDTO } from './DTOs/timesheetDTO';
 import { getProjectDTO } from './DTOs/getProjectDTO';
 import { ProjectsService } from './Services/project.service';
+import { TasksService } from './Services/task.service';
 import { ProjectPickerModel } from './Models/project-picker-model.model';
 
 @Component({
@@ -88,6 +88,7 @@ export class AppComponent {
 
   constructor(
     private projectsService: ProjectsService,
+    private tasksService: TasksService,
     private http: HttpClient,
     httpErrorHandler: HttpErrorHandler
   ) {
@@ -179,45 +180,49 @@ export class AppComponent {
     this.invalidDates = [today, invalidDate];
     /* #endregion */
 
-    /* #region LISTBOX */
-    /* HERTIL BJA
-      Oprette service til at hente task list og læg resultatet på definedTasks listen
-    */
-    this.definedTasks = [
-      {
-        label: 'GIPS',
-        value: 'gips',
-        items: [
-          { label: 'Slæbe gipsplader', value: 'slæbeGipsplader' },
-          { label: 'Montere vinkler', value: 'montereVinkler' },
-          { label: 'Skrue gipsplader', value: 'skrueGipsplader' },
-          { label: 'Spartle gipsplader', value: 'spartleGipsplader' },
-        ],
-      },
-      {
-        label: 'RIVE',
-        value: 'rive',
-        items: [
-          { label: 'Rive gammel gipsvæg', value: 'riveGammelGipsVaeg' },
-          { label: 'Rive gammel butik', value: 'riveGammelButik' },
-          { label: 'Rive gammel kontor', value: 'riveGammelKontor' },
-        ],
-      },
-      {
-        label: 'OPRYDNING',
-        value: 'oprydning',
-        items: [
-          { label: 'Generel oprydning', value: 'generelOprydning' },
-          { label: 'Feje', value: 'feje' },
-          { label: 'Fjerne skrammel', value: 'fjerneSkrammel' },
-        ],
-      },
-      {
-        label: 'AFVIG',
-        value: 'afvig',
-        items: [{ label: 'Afvig01', value: 'afvig01' }],
-      },
-    ];
+    // let tasks = this.tasksService.getTasks(this.APIrootURI);
+    this.definedTasks = this.tasksService.getTasks(this.APIrootURI);
+    console.dir(this.definedTasks);
+
+    // // this.definedTasks = tasks;
+    // this.definedTasks = [
+    //   {
+    //     label: 'GIPS',
+    //     value: 'gips',
+    //     items: [
+    //       { label: 'Slæbe gipsplader', value: 'slæbeGipsplader' },
+    //       { label: 'Montere vinkler', value: 'montereVinkler' },
+    //       { label: 'Skrue gipsplader', value: 'skrueGipsplader' },
+    //       { label: 'Spartle gipsplader', value: 'spartleGipsplader' },
+    //     ],
+    //   },
+    //   {
+    //     label: 'RIVE',
+    //     value: 'rive',
+    //     items: [
+    //       { label: 'Rive gammel gipsvæg', value: 'riveGammelGipsVaeg' },
+    //       { label: 'Rive gammel butik', value: 'riveGammelButik' },
+    //       { label: 'Rive gammel kontor', value: 'riveGammelKontor' },
+    //     ],
+    //   },
+    //   {
+    //     label: 'OPRYDNING',
+    //     value: 'oprydning',
+    //     items: [
+    //       { label: 'Generel oprydning', value: 'generelOprydning' },
+    //       { label: 'Feje', value: 'feje' },
+    //       { label: 'Fjerne skrammel', value: 'fjerneSkrammel' },
+    //     ],
+    //   },
+    //   {
+    //     label: 'AFVIG',
+    //     value: 'afvig',
+    //     items: [{ label: 'Afvig01', value: 'afvig01' }],
+    //   },
+    // ];
+
+    // console.dir(this.definedTasks);
+
     /* #endregion */
   }
 
@@ -273,7 +278,9 @@ export class AppComponent {
       }),
     };
 
-    this.http.post<string>(this.APIrootURI + '/projects', data).subscribe({
+    console.log('-1-', data);
+
+    this.http.put<string>(this.APIrootURI + '/timesheets', data).subscribe({
       next: (data) => {
         console.log('-next-', data);
       },
