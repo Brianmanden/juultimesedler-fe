@@ -41,7 +41,6 @@ export class ProjectsService {
       .then((response) => response.json())
       .then((data) => {
         data.forEach((item: getProjectDTO) => {
-          console.log('-getProjectDTO-', item);
           returnList.push({
             id: item.projectId,
             name: item.projectName,
@@ -51,9 +50,6 @@ export class ProjectsService {
       })
       .catch((error) => {
         console.error('Error:', error);
-      })
-      .finally(() => {
-        console.log('Finally - projects: ' + returnList);
       });
 
     return returnList;
