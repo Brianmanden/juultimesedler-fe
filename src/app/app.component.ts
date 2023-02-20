@@ -180,50 +180,9 @@ export class AppComponent {
     this.invalidDates = [today, invalidDate];
     /* #endregion */
 
-    // let tasks = this.tasksService.getTasks(this.APIrootURI);
-    this.definedTasks = await this.tasksService.getTasks(this.APIrootURI);
-    console.dir(this.definedTasks);
-
-    // // this.definedTasks = tasks;
-    // this.definedTasks = [
-    //   {
-    //     label: 'GIPS',
-    //     value: 'gips',
-    //     items: [
-    //       { label: 'Slæbe gipsplader', value: 'slæbeGipsplader' },
-    //       { label: 'Montere vinkler', value: 'montereVinkler' },
-    //       { label: 'Skrue gipsplader', value: 'skrueGipsplader' },
-    //       { label: 'Spartle gipsplader', value: 'spartleGipsplader' },
-    //     ],
-    //   },
-    //   {
-    //     label: 'RIVE',
-    //     value: 'rive',
-    //     items: [
-    //       { label: 'Rive gammel gipsvæg', value: 'riveGammelGipsVaeg' },
-    //       { label: 'Rive gammel butik', value: 'riveGammelButik' },
-    //       { label: 'Rive gammel kontor', value: 'riveGammelKontor' },
-    //     ],
-    //   },
-    //   {
-    //     label: 'OPRYDNING',
-    //     value: 'oprydning',
-    //     items: [
-    //       { label: 'Generel oprydning', value: 'generelOprydning' },
-    //       { label: 'Feje', value: 'feje' },
-    //       { label: 'Fjerne skrammel', value: 'fjerneSkrammel' },
-    //     ],
-    //   },
-    //   {
-    //     label: 'AFVIG',
-    //     value: 'afvig',
-    //     items: [{ label: 'Afvig01', value: 'afvig01' }],
-    //   },
-    // ];
-
-    // console.dir(this.definedTasks);
-
     /* #endregion */
+    // Fetch tasks defined in BE
+    this.definedTasks = await this.tasksService.getTasks(this.APIrootURI);
   }
 
   search(event: { query: any }) {
