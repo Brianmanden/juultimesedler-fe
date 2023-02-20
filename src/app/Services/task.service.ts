@@ -15,11 +15,11 @@ export class TasksService {
     this.handleError = httpErrorHandler.createHandleError('TasksService');
   }
 
-  getTasks(APIrootURI: string): SelectItemGroup[] {
+  async getTasks(APIrootURI: string): Promise<SelectItemGroup[]> {
     let returnList: SelectItemGroup[] = [];
     // let returnList: string[] = [];
 
-    fetch(APIrootURI + '/tasks/', {
+    await fetch(APIrootURI + '/tasks/', {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
@@ -33,8 +33,6 @@ export class TasksService {
           let taskItems: SelectItem[] = [];
 
           taskGroup.taskNames.forEach((taskName: string) => {
-            // console.log(taskName);
-
             taskItems.push({
               label: taskName,
               value: taskName,
@@ -54,7 +52,6 @@ export class TasksService {
         console.error('Error:', error);
       });
 
-    // TODO BJA HERTIL
     return returnList;
   }
 }

@@ -110,7 +110,7 @@ export class AppComponent {
     this.filteredProjects = filtered;
   }
 
-  ngOnInit() {
+  async ngOnInit() {
     this.projects = this.projectsService.getCurrentProjects(this.APIrootURI);
 
     /* #region DAYS & MONTHS */
@@ -181,7 +181,7 @@ export class AppComponent {
     /* #endregion */
 
     // let tasks = this.tasksService.getTasks(this.APIrootURI);
-    this.definedTasks = this.tasksService.getTasks(this.APIrootURI);
+    this.definedTasks = await this.tasksService.getTasks(this.APIrootURI);
     console.dir(this.definedTasks);
 
     // // this.definedTasks = tasks;
