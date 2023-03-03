@@ -1,15 +1,9 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { HttpHeaders } from '@angular/common/http';
-
-import { ConfigService } from '../config/config.service';
-import { Observable } from 'rxjs';
-import { catchError } from 'rxjs/operators';
 import { HttpErrorHandler, HandleError } from './http-error-handler.service';
-
 import { ProjectPickerModel } from '../Models/project-picker-model.model';
 import { getProjectDTO } from '../DTOs/getProjectDTO';
-import { timesheetDTO } from '../DTOs/timesheetDTO';
 
 const httpOptions = {
   headers: new HttpHeaders({
@@ -53,16 +47,5 @@ export class ProjectsService {
       });
 
     return returnList;
-  }
-
-  postProject(
-    postProjectURI: string,
-    data: timesheetDTO
-  ): Observable<timesheetDTO> {
-    console.log(postProjectURI, data);
-
-    return this.http
-      .post<timesheetDTO>(postProjectURI, data, httpOptions)
-      .pipe(catchError(this.handleError('postProject', data)));
   }
 }

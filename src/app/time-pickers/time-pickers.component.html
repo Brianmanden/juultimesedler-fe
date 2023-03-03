@@ -1,43 +1,57 @@
 <!-- TIME PICKER STARTTIME -->
-<label>Starttid</label>
+<label>Starttid {{ startTime }}</label>
 <p-calendar
-    [(ngModel)]="startTime"
-    [showTime]="true"
-    [stepMinute]="15"
-    [timeOnly]="true"
-    [touchUI]="true"
-    [readonlyInput]="true">
-    <ng-template pTemplate="footer" let-date>
-        <p-message
-            [ngStyle]="{ 'visibility': ( endTime <= startTime ) ? 'visible' : 'hidden' }"
-            severity="warn"
-            text="Starttid skal være før sluttid!"
-            styleClass="p-mb-2">
-        </p-message>
-    </ng-template>
+  [(ngModel)]="startTime"
+  dataType="string"
+  hourFormat="24"
+  inputId="timeonlyStartTime"
+  [readonlyInput]="true"
+  [showTime]="true"
+  [stepMinute]="15"
+  [timeOnly]="true"
+  [touchUI]="true"
+>
+  <ng-template pTemplate="footer" let-date>
+    <p-message
+      [ngStyle]="{ visibility: endTime <= startTime ? 'visible' : 'hidden' }"
+      severity="warn"
+      text="Starttid skal være før sluttid!"
+      styleClass="p-mb-2"
+    >
+    </p-message>
+  </ng-template>
 </p-calendar>
 
 <!-- TIME PICKER ENDTIME -->
 <label>Sluttid</label>
 <p-calendar
-    [(ngModel)]="endTime"
-    [showTime]="true"
-    [stepMinute]="15"
-    [timeOnly]="true"
-    [touchUI]="true"
-    [readonlyInput]="true">
-    <ng-template pTemplate="footer" let-date>
-        <p-message
-            [ngStyle]="{ 'visibility': ( endTime <= startTime ) ? 'visible' : 'hidden' }"
-            severity="warn"
-            text="Sluttid skal være efter starttid!"
-            styleClass="p-mb-2">
-        </p-message>
-    </ng-template>
+  [(ngModel)]="endTime"
+  dataType="string"
+  hourFormat="24"
+  inputId="timeonlyEndTime"
+  [showTime]="true"
+  [stepMinute]="15"
+  [timeOnly]="true"
+  [touchUI]="true"
+  [readonlyInput]="true"
+>
+  <ng-template pTemplate="footer" let-date>
+    <p-message
+      [ngStyle]="{ visibility: endTime <= startTime ? 'visible' : 'hidden' }"
+      severity="warn"
+      text="Sluttid skal være efter starttid!"
+      styleClass="p-mb-2"
+    >
+    </p-message>
+  </ng-template>
 </p-calendar>
 <p-message
-    [ngStyle]="{ 'padding-top' : '1rem', 'display': ( endTime <= startTime ) ? 'block' : 'none' }"
-    severity="warn"
-    text="Angiv korrekte tider"
-    styleClass="p-mr-2">
+  [ngStyle]="{
+    'padding-top': '1rem',
+    display: endTime <= startTime ? 'block' : 'none'
+  }"
+  severity="warn"
+  text="Angiv korrekte tider"
+  styleClass="p-mr-2"
+>
 </p-message>

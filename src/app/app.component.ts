@@ -10,6 +10,7 @@ import { timesheetDTO } from './DTOs/timesheetDTO';
 import { getProjectDTO } from './DTOs/getProjectDTO';
 import { ProjectsService } from './Services/project.service';
 import { TasksService } from './Services/task.service';
+import { TimesheetService } from './Services/timesheet.service';
 import { ProjectPickerModel } from './Models/project-picker-model.model';
 
 @Component({
@@ -23,7 +24,7 @@ export class AppComponent {
   APIrootURI: string = 'https://localhost:44352/api';
   workerId: number = 1110;
 
-  results: string[] = ['Byg1', 'Byg2', 'Byg3', 'Ombyg1', 'Ombyg2'];
+  results: string[] = [];
   showButtonBar: boolean;
   text: string;
   title = 'juultimesedler';
@@ -47,31 +48,14 @@ export class AppComponent {
   jobDesc: string;
 
   /* #region DATES & TIME */
-  dateValue: Date;
-  dates: Date[];
-  date1: Date;
-  date2: Date;
-  date3: Date;
-  date4: Date;
-  date5: Date;
-  date6: Date;
-  date7: Date;
-  date8: Date;
-  date9: Date;
-  date10: Date;
-  date11: Date;
-  date12: Date;
-  date13: Date;
-  date14: Date;
   invalidDates: Array<Date>;
-
-  startTime: Date = new Date(2022, 2, 15, 7, 0, 0);
-  endTime: Date = new Date(2022, 2, 15, 16, 0, 0);
+  // TODO BJA - WIP - Pass down startTime and endTime into time-pickers component
+  startTime: Date = new Date('2023-03-03T07:00:00.000Z');
+  endTime: Date = new Date('2023-03-03T16:00:00.000Z');
 
   rangeDates: Date[];
   minDate: Date;
   maxDate: Date;
-  // es: any;
   en: any;
   /* #endregion */
 
@@ -89,10 +73,11 @@ export class AppComponent {
   constructor(
     private projectsService: ProjectsService,
     private tasksService: TasksService,
+    private timesheetService: TimesheetService,
     private http: HttpClient,
     httpErrorHandler: HttpErrorHandler
   ) {
-    this.handleError = httpErrorHandler.createHandleError('ProjectsService');
+    this.handleError = httpErrorHandler.createHandleError('TimesheetService');
   }
 
   filterProject(event: { query: any }) {
@@ -188,12 +173,10 @@ export class AppComponent {
   search(event: { query: any }) {
     let filtered: any[] = [];
     let query = event.query;
-    console.log(query);
 
     for (let i = 0; i < this.items.length; i++) {
       let item = this.items[i];
       if (item.includes(query.toLowerCase())) {
-        console.log(item);
         filtered.push(item);
         this.results.push(item);
       }
@@ -209,12 +192,10 @@ export class AppComponent {
   filterItems(event: { query: any }) {
     let filtered: any[] = [];
     let query = event.query;
-    console.log(query);
 
     for (let i = 0; i < this.items.length; i++) {
       let item = this.items[i];
       if (item.includes(query.toLowerCase())) {
-        console.log(item);
         filtered.push(item);
       }
     }
@@ -222,30 +203,16 @@ export class AppComponent {
     this.filteredItems = filtered;
   }
 
-  submitTimesheets(event: any): void {
+  submitTimesheet(event: any): void {
     const data: timesheetDTO = new timesheetDTO();
     data.selectedProjectId = 1115; //this.selectedProjectAdvanced;
     data.selectedTasks = this.selectedTasks;
-    data.startTime = this.startTime.toDateString();
-    data.endTime = this.endTime.toDateString();
+    console.log('-0-', this.startTime);
+    data.startTime = this.startTime;
+    data.endTime = this.endTime;
     data.jobDesc = this.jobDesc;
 
-    const httpOptions = {
-      headers: new HttpHeaders({
-        'Content-Type': 'application/json',
-        Authorization: 'my-auth-token',
-      }),
-    };
-
-    console.log('-1-', data);
-
-    this.http.put<string>(this.APIrootURI + '/timesheets', data).subscribe({
-      next: (data) => {
-        console.log('-next-', data);
-      },
-      error: (error) => {
-        console.error('There was an error!', error);
-      },
-    });
+    let thing = this.timesheetService.postTimesheet(this.APIrootURI, data);
+    console.log('-1-', thing);
   }
 }

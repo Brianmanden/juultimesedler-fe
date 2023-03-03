@@ -1,7 +1,7 @@
 export class timesheetDTO {
   selectedProjectId: number;
   selectedTasks: string[];
-  startTime: string;
-  endTime: string;
+  startTime: Date;
+  endTime: Date;
   jobDesc: string;
 }
