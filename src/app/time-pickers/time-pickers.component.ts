@@ -1,17 +1,13 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input } from '@angular/core';
 
 @Component({
   selector: 'app-time-pickers',
   templateUrl: './time-pickers.component.html',
   styleUrls: ['./time-pickers.component.css'],
 })
-export class TimePickersComponent implements OnInit {
-  //startTime: Date = new Date();
-  //endTime: Date;
-  startTime: Date = new Date(2023, 3, 3, 7, 0, 0);
-  endTime: Date = new Date(2023, 3, 3, 16, 0, 0);
+export class TimePickersComponent{
+  @Input() startTime!: Date;
+  @Input() endTime!: Date;
 
   constructor() {}
-
-  ngOnInit(): void {}
 }

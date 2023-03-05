@@ -18,9 +18,8 @@ import { TimePickersComponent } from './time-pickers/time-pickers.component';
 import { HttpErrorHandler } from './Services/http-error-handler.service';
 import { MessageService } from 'primeng/api';
 import { MyMessageService } from './Services/message.service';
-
 import { ProjectsService } from './Services/project.service';
-// import { ProjectsService } from './project.service';
+import { TimesheetsService } from './Services/timesheets.service';
 
 @NgModule({
   imports: [
@@ -45,6 +44,7 @@ import { ProjectsService } from './Services/project.service';
     ProjectsService,
     MessageService,
     MyMessageService,
+    TimesheetsService,
   ],
   bootstrap: [AppComponent],
 })

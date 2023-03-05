@@ -10,7 +10,7 @@ import { timesheetDTO } from './DTOs/timesheetDTO';
 import { getProjectDTO } from './DTOs/getProjectDTO';
 import { ProjectsService } from './Services/project.service';
 import { TasksService } from './Services/task.service';
-import { TimesheetService } from './Services/timesheet.service';
+import { TimesheetsService } from './Services/timesheets.service';
 import { ProjectPickerModel } from './Models/project-picker-model.model';
 
 @Component({
@@ -49,7 +49,6 @@ export class AppComponent {
 
   /* #region DATES & TIME */
   invalidDates: Array<Date>;
-  // TODO BJA - WIP - Pass down startTime and endTime into time-pickers component
   startTime: Date = new Date('2023-03-03T07:00:00.000Z');
   endTime: Date = new Date('2023-03-03T16:00:00.000Z');
 
@@ -73,7 +72,7 @@ export class AppComponent {
   constructor(
     private projectsService: ProjectsService,
     private tasksService: TasksService,
-    private timesheetService: TimesheetService,
+    private timesheetsService: TimesheetsService,
     private http: HttpClient,
     httpErrorHandler: HttpErrorHandler
   ) {
@@ -207,12 +206,16 @@ export class AppComponent {
     const data: timesheetDTO = new timesheetDTO();
     data.selectedProjectId = 1115; //this.selectedProjectAdvanced;
     data.selectedTasks = this.selectedTasks;
-    console.log('-0-', this.startTime);
     data.startTime = this.startTime;
     data.endTime = this.endTime;
     data.jobDesc = this.jobDesc;
 
-    let thing = this.timesheetService.postTimesheet(this.APIrootURI, data);
-    console.log('-1-', thing);
+    this.timesheetsService
+      .upsertTimesheet(this.APIrootURI, data)
+      .subscribe((res) => {
+        console.group("Timesheet upserted");
+        console.table(res);
+        console.groupEnd();
+      });
   }
 }

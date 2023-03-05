@@ -1,8 +1,8 @@
 <!-- TIME PICKER STARTTIME -->
-<label>Starttid {{ startTime }}</label>
+<label>Starttid</label>
 <p-calendar
   [(ngModel)]="startTime"
-  dataType="string"
+  dataType="date"
   hourFormat="24"
   inputId="timeonlyStartTime"
   [readonlyInput]="true"
@@ -26,7 +26,7 @@
 <label>Sluttid</label>
 <p-calendar
   [(ngModel)]="endTime"
-  dataType="string"
+  dataType="date"
   hourFormat="24"
   inputId="timeonlyEndTime"
   [showTime]="true"
