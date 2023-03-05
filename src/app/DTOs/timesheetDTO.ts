@@ -3,5 +3,5 @@ export class timesheetDTO {
   selectedTasks: string[];
   startTime: Date;
   endTime: Date;
-  jobDesc: string;
+  taskComments: string;
 }

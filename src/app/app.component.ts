@@ -32,20 +32,10 @@ export class AppComponent {
   value: Date;
 
   /* #region PROJECTS */
-  items: string[] = [
-    'Byg1',
-    'Byg2',
-    'Byg3',
-    'Ombyg1',
-    'Ombyg2',
-    'Ombyg3',
-    'Riv1',
-    'Riv2',
-    'Riv3',
-  ];
+  items: string[] = [];
   filteredItems: any[];
   /* #endregion */
-  jobDesc: string;
+  taskComments: string;
 
   /* #region DATES & TIME */
   invalidDates: Array<Date>;
@@ -208,7 +198,7 @@ export class AppComponent {
     data.selectedTasks = this.selectedTasks;
     data.startTime = this.startTime;
     data.endTime = this.endTime;
-    data.jobDesc = this.jobDesc;
+    data.taskComments = this.taskComments;
 
     this.timesheetsService
       .upsertTimesheet(this.APIrootURI, data)
@@ -217,5 +207,12 @@ export class AppComponent {
         console.table(res);
         console.groupEnd();
       });
+  }
+
+  clearSearchBox(event: any):void{
+    // TODO BJA HERTIL
+    // Clear search filter
+    console.dir(event);
+    console.dir(this);
   }
 }

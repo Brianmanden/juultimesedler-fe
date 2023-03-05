@@ -1,0 +1,10 @@
+.clear-search-box{
+    left: -3px;
+    padding: 5px;
+    position: relative;
+    top: 2px;
+}
+
+.clear-search-box:focus{
+    box-shadow: none;
+}
