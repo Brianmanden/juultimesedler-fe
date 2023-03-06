@@ -1,13 +1,20 @@
+// Angular
 import { HttpClient } from '@angular/common/http';
-import { HttpErrorHandler, HandleError } from './Services/http-error-handler.service';
 import { Component } from '@angular/core';
+
+// PrimeNG
 import { SelectItemGroup } from 'primeng/api';
+
+// Services
+import { HttpErrorHandler, HandleError } from './Services/http-error-handler.service';
+import { ProjectsService } from './Services/project.service';
+import { TimesheetsService } from './Services/timesheets.service';
+import { TasksService } from './Services/task.service';
+
+// Models and DTOs
+import { ProjectPickerModel } from './Models/project-picker-model.model';
 import { timesheetDTO } from './DTOs/timesheetDTO';
 import { getProjectDTO } from './DTOs/getProjectDTO';
-import { ProjectsService } from './Services/project.service';
-import { TasksService } from './Services/task.service';
-import { TimesheetsService } from './Services/timesheets.service';
-import { ProjectPickerModel } from './Models/project-picker-model.model';
 
 @Component({
   selector: 'app-root',
