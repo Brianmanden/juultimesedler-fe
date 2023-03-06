@@ -1,9 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { HttpHeaders } from '@angular/common/http';
-import {
-  HttpErrorHandler,
-  HandleError,
-} from './Services/http-error-handler.service';
+import { HttpErrorHandler, HandleError } from './Services/http-error-handler.service';
 import { Component } from '@angular/core';
 import { SelectItemGroup } from 'primeng/api';
 import { timesheetDTO } from './DTOs/timesheetDTO';
@@ -90,45 +86,11 @@ export class AppComponent {
     /* #region DAYS & MONTHS */
     this.en = {
       firstDayOfWeek: 1,
-      dayNames: [
-        'Sunday',
-        'Monday',
-        'Tuesday',
-        'Wednesday',
-        'Thursday',
-        'Friday',
-        'Staurday',
-      ],
+      dayNames: ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday','Saturday',],
       dayNamesShort: ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'],
       dayNamesMin: ['Su', 'M', 'Tu', 'W', 'Th', 'F', 'Sa'],
-      monthNames: [
-        'January',
-        'February',
-        'March',
-        'April',
-        'May',
-        'June',
-        'July',
-        'August',
-        'September',
-        'October',
-        'November',
-        'December',
-      ],
-      monthNamesShort: [
-        'Jan',
-        'Feb',
-        'Mar',
-        'Apr',
-        'May',
-        'Jun',
-        'Jul',
-        'Aug',
-        'Sep',
-        'Oct',
-        'Nov',
-        'Dec',
-      ],
+      monthNames: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
+      monthNamesShort: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
       today: 'Today',
       clear: 'Clear',
     };
@@ -209,10 +171,9 @@ export class AppComponent {
       });
   }
 
-  clearSearchBox(event: any):void{
-    // TODO BJA HERTIL
+  clearSearchBox(event: any, options: any):void{
     // Clear search filter
-    console.dir(event);
-    console.dir(this);
+    // TODO WIP BJA HERTIL
+    this.selectedTasks = [];
   }
 }
