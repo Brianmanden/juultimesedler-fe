@@ -29,7 +29,10 @@
             </div>
 
             <div class="row">
-              <app-time-pickers [startTime]="startTime" [endTime]="endTime"></app-time-pickers>
+              <app-time-pickers
+                [startTime]="startTime"
+                [endTime]="endTime"
+              ></app-time-pickers>
             </div>
 
             <div class="row">
@@ -40,31 +43,30 @@
             <div class="row">
               <label>Liste over opgaver</label>
               <p-listbox
-              [(ngModel)]="selectedTasks"
-              [options]="definedTasks"
-              [group]="true"
-              [metaKeySelection]="false"
-              [checkbox]="true"
-              [filter]="true"
-              [multiple]="true"
-              [listStyle]="{ 'max-height': '1250px' }"
+                [(ngModel)]="selectedTasks"
+                [options]="definedTasks"
+                [group]="true"
+                [metaKeySelection]="false"
+                [checkbox]="true"
+                [filter]="true"
+                [multiple]="true"
+                [listStyle]="{ 'max-height': '1250px' }"
               >
-              <!-- TODO WIP BJA HERTIL -->
-              <!-- <p-header>
-                <button pButton
-                  label="Clear filter"
-                  type="button"
-                  icon="pi pi-times"
-                  class="p-button-text clear-search-box"
-                  (click)="clearSearchBox($event, selectedTasks)">
-                </button>
-              </p-header> -->
+                <p-header>
+                  <button
+                    pButton
+                    label="Clear search"
+                    type="button"
+                    icon="pi pi-times"
+                    class="p-button-text clear-search-box"
+                    (click)="clearSearchBox($event)"
+                  ></button>
+                </p-header>
                 <ng-template let-group pTemplate="group">
                   <div class="p-d-flex p-ai-center">
                     <span>{{ group.label }}</span>
                   </div>
                 </ng-template>
-
               </p-listbox>
             </div>
 

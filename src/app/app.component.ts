@@ -1,20 +1,24 @@
-// Angular
+/* #region Angular */
 import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
-
-// PrimeNG
+/* #endregion */
+/* #region PrimeNG */
 import { SelectItemGroup } from 'primeng/api';
-
-// Services
-import { HttpErrorHandler, HandleError } from './Services/http-error-handler.service';
+/* #endregion */
+/* #region Services */
+import {
+  HttpErrorHandler,
+  HandleError,
+} from './Services/http-error-handler.service';
 import { ProjectsService } from './Services/project.service';
 import { TimesheetsService } from './Services/timesheets.service';
 import { TasksService } from './Services/task.service';
-
-// Models and DTOs
+/* #endregion */
+/* #region Models and DTOs */
 import { ProjectPickerModel } from './Models/project-picker-model.model';
 import { timesheetDTO } from './DTOs/timesheetDTO';
 import { getProjectDTO } from './DTOs/getProjectDTO';
+/* #endregion */
 
 @Component({
   selector: 'app-root',
@@ -22,7 +26,7 @@ import { getProjectDTO } from './DTOs/getProjectDTO';
   styleUrls: ['./app.component.css'],
 })
 export class AppComponent {
-  private handleError: HandleError;
+  /* #region Public fields */
 
   APIrootURI: string = 'https://localhost:44352/api';
   workerId: number = 1110;
@@ -38,8 +42,9 @@ export class AppComponent {
   items: string[] = [];
   filteredItems: any[];
   /* #endregion */
+  /* #region TASKS */
   taskComments: string;
-
+  /* #endregion */
   /* #region DATES & TIME */
   invalidDates: Array<Date>;
   startTime: Date = new Date('2023-03-03T07:00:00.000Z');
@@ -50,16 +55,18 @@ export class AppComponent {
   maxDate: Date;
   en: any;
   /* #endregion */
-
   /* #region PROJECT PICKER */
   projects: ProjectPickerModel[] = [];
   selectedProjectAdvanced: number;
   filteredProjects: getProjectDTO[];
   /* #endregion */
-
   /* #region LISTBOX */
   selectedTasks: any[];
   definedTasks: SelectItemGroup[];
+  /* #endregion */
+  /* #endregion */
+  /* #region Private fields */
+  private handleError: HandleError;
   /* #endregion */
 
   constructor(
@@ -72,37 +79,55 @@ export class AppComponent {
     this.handleError = httpErrorHandler.createHandleError('TimesheetService');
   }
 
-  filterProject(event: { query: any }) {
-    //in a real application, make a request to a remote url with the query and return filtered results, for demo we filter at client side
-    let filtered: any[] = [];
-    let query = event.query;
-
-    for (let i = 0; i < this.projects.length; i++) {
-      let project = this.projects[i];
-      if (project.name?.toLowerCase().indexOf(query.toLowerCase()) == 0) {
-        filtered.push(project);
-      }
-    }
-
-    this.filteredProjects = filtered;
-  }
-
   async ngOnInit() {
     this.projects = this.projectsService.getCurrentProjects(this.APIrootURI);
 
     /* #region DAYS & MONTHS */
     this.en = {
       firstDayOfWeek: 1,
-      dayNames: ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday','Saturday',],
+      dayNames: [
+        'Sunday',
+        'Monday',
+        'Tuesday',
+        'Wednesday',
+        'Thursday',
+        'Friday',
+        'Saturday',
+      ],
       dayNamesShort: ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'],
       dayNamesMin: ['Su', 'M', 'Tu', 'W', 'Th', 'F', 'Sa'],
-      monthNames: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
-      monthNamesShort: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+      monthNames: [
+        'January',
+        'February',
+        'March',
+        'April',
+        'May',
+        'June',
+        'July',
+        'August',
+        'September',
+        'October',
+        'November',
+        'December',
+      ],
+      monthNamesShort: [
+        'Jan',
+        'Feb',
+        'Mar',
+        'Apr',
+        'May',
+        'Jun',
+        'Jul',
+        'Aug',
+        'Sep',
+        'Oct',
+        'Nov',
+        'Dec',
+      ],
       today: 'Today',
       clear: 'Clear',
     };
     /* #endregion */
-
     /* #region TIME VARIABLES */
     let today = new Date();
     let month = today.getMonth();
@@ -122,43 +147,22 @@ export class AppComponent {
     invalidDate.setDate(today.getDate() - 1);
     this.invalidDates = [today, invalidDate];
     /* #endregion */
-
-    /* #endregion */
-    // Fetch tasks defined in BE
     this.definedTasks = await this.tasksService.getTasks(this.APIrootURI);
   }
 
-  search(event: { query: any }) {
+  /* #region Public methods */
+  filterProject(event: { query: any }) {
     let filtered: any[] = [];
     let query = event.query;
 
-    for (let i = 0; i < this.items.length; i++) {
-      let item = this.items[i];
-      if (item.includes(query.toLowerCase())) {
-        filtered.push(item);
-        this.results.push(item);
+    for (let i = 0; i < this.projects.length; i++) {
+      let project = this.projects[i];
+      if (project.name?.toLowerCase().indexOf(query.toLowerCase()) == 0) {
+        filtered.push(project);
       }
     }
 
-    this.filteredItems = filtered;
-  }
-
-  handleDropdown(event: { query: any }) {
-    console.log(event.query);
-  }
-
-  filterItems(event: { query: any }) {
-    let filtered: any[] = [];
-    let query = event.query;
-
-    for (let i = 0; i < this.items.length; i++) {
-      let item = this.items[i];
-      if (item.includes(query.toLowerCase())) {
-        filtered.push(item);
-      }
-    }
-
-    this.filteredItems = filtered;
+    this.filteredProjects = filtered;
   }
 
   submitTimesheet(event: any): void {
@@ -172,15 +176,19 @@ export class AppComponent {
     this.timesheetsService
       .upsertTimesheet(this.APIrootURI, data)
       .subscribe((res) => {
-        console.group("Timesheet upserted");
+        console.group('Timesheet upserted');
         console.table(res);
         console.groupEnd();
       });
   }
 
-  clearSearchBox(event: any, options: any):void{
-    // Clear search filter
-    // TODO WIP BJA HERTIL
-    this.selectedTasks = [];
+  clearSearchBox(event: Event): void {
+    // TODO WIP BJA
+    const listboxSearchfield = document.querySelectorAll(
+      'p-listbox .p-inputtext'
+    )[0] as HTMLInputElement;
+
+    listboxSearchfield.value = '';
   }
+  /* #endregion */
 }
