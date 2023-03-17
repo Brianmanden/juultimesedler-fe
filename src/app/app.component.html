@@ -90,8 +90,7 @@
               <label for="float-input">Udførte opgaver</label>
             </div>
           </p-tabPanel>
-
-          <p-tabPanel header="Tirsdag">
+          <p-tabPanel header="Tirsdag - d.15.">
             <div class="row">
               <label>Projekt</label>
               <p-autoComplete
@@ -103,7 +102,7 @@
               >
                 <ng-template let-project pTemplate="item">
                   <div class="project-item">
-                    <div>{{ project.name }} - {{ project.description }}</div>
+                    <div>{{ project.id }} - {{ project.name }}</div>
                   </div>
                 </ng-template>
               </p-autoComplete>
@@ -114,63 +113,486 @@
             </div>
 
             <div class="row">
-              <h5>Ingen projekter for tirsdag</h5>
+              <app-time-pickers
+                [startTime]="startTime"
+                [endTime]="endTime"
+              ></app-time-pickers>
+            </div>
+
+            <div class="row">
+              <p-divider></p-divider>
+            </div>
+
+            <!-- LISTBOX -->
+            <div class="row">
+              <label>Liste over opgaver</label>
+              <p-listbox
+                *ngIf="renderListbox"
+                [(ngModel)]="selectedTasks"
+                [options]="definedTasks"
+                [group]="true"
+                [metaKeySelection]="false"
+                [checkbox]="true"
+                [filter]="true"
+                [multiple]="true"
+                [listStyle]="{ 'max-height': '1250px' }"
+              >
+                <p-header>
+                  <button
+                    pButton
+                    label="Clear search"
+                    type="button"
+                    icon="pi pi-times"
+                    class="p-button-text clear-search-box"
+                    (click)="clearSearchBox($event)"
+                  ></button>
+                </p-header>
+                <ng-template let-group pTemplate="group">
+                  <div class="p-d-flex p-ai-center">
+                    <span>{{ group.label }}</span>
+                  </div>
+                </ng-template>
+              </p-listbox>
+            </div>
+
+            <div class="row">
+              <p-divider></p-divider>
+            </div>
+
+            <!-- TEXTAREA -->
+            <div class="row">
+              <label>Kommentarer</label>
+              <textarea
+                [(ngModel)]="taskComments"
+                id="float-input"
+                rows="5"
+                cols="30"
+                pinputtextarea=""
+                class="p-inputtextarea p-inputtext p-component p-element"
+              >
+              </textarea>
+              <label for="float-input">Udførte opgaver</label>
             </div>
           </p-tabPanel>
-          <p-tabPanel header="Onsdag">
-            <p>
-              At vero eos et accusamus et iusto odio dignissimos ducimus qui
-              blanditiis praesentium voluptatum deleniti atque corrupti quos
-              dolores et quas molestias excepturi sint occaecati cupiditate non
-              provident, similique sunt in culpa qui officia deserunt mollitia
-              animi, id est laborum et dolorum fuga. Et harum quidem rerum
-              facilis est et expedita distinctio. Nam libero tempore, cum soluta
-              nobis est eligendi optio cumque nihil impedit quo minus.
-            </p>
+          <p-tabPanel header="Onsdag - d.16.">
+            <div class="row">
+              <label>Projekt</label>
+              <p-autoComplete
+                [(ngModel)]="selectedProjectAdvanced"
+                [suggestions]="filteredProjects"
+                (completeMethod)="filterProject($event)"
+                field="name"
+                [dropdown]="true"
+              >
+                <ng-template let-project pTemplate="item">
+                  <div class="project-item">
+                    <div>{{ project.id }} - {{ project.name }}</div>
+                  </div>
+                </ng-template>
+              </p-autoComplete>
+            </div>
+
+            <div class="row">
+              <p-divider></p-divider>
+            </div>
+
+            <div class="row">
+              <app-time-pickers
+                [startTime]="startTime"
+                [endTime]="endTime"
+              ></app-time-pickers>
+            </div>
+
+            <div class="row">
+              <p-divider></p-divider>
+            </div>
+
+            <!-- LISTBOX -->
+            <div class="row">
+              <label>Liste over opgaver</label>
+              <p-listbox
+                *ngIf="renderListbox"
+                [(ngModel)]="selectedTasks"
+                [options]="definedTasks"
+                [group]="true"
+                [metaKeySelection]="false"
+                [checkbox]="true"
+                [filter]="true"
+                [multiple]="true"
+                [listStyle]="{ 'max-height': '1250px' }"
+              >
+                <p-header>
+                  <button
+                    pButton
+                    label="Clear search"
+                    type="button"
+                    icon="pi pi-times"
+                    class="p-button-text clear-search-box"
+                    (click)="clearSearchBox($event)"
+                  ></button>
+                </p-header>
+                <ng-template let-group pTemplate="group">
+                  <div class="p-d-flex p-ai-center">
+                    <span>{{ group.label }}</span>
+                  </div>
+                </ng-template>
+              </p-listbox>
+            </div>
+
+            <div class="row">
+              <p-divider></p-divider>
+            </div>
+
+            <!-- TEXTAREA -->
+            <div class="row">
+              <label>Kommentarer</label>
+              <textarea
+                [(ngModel)]="taskComments"
+                id="float-input"
+                rows="5"
+                cols="30"
+                pinputtextarea=""
+                class="p-inputtextarea p-inputtext p-component p-element"
+              >
+              </textarea>
+              <label for="float-input">Udførte opgaver</label>
+            </div>
           </p-tabPanel>
-          <p-tabPanel header="Torsdag">
-            <p>
-              Sed ut perspiciatis unde omnis iste natus error sit voluptatem
-              accusantium doloremque laudantium, totam rem aperiam, eaque ipsa
-              quae ab illo inventore veritatis et quasi architecto beatae vitae
-              dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit
-              aspernatur aut odit aut fugit, sed quia consequuntur magni dolores
-              eos qui ratione voluptatem sequi nesciunt. Consectetur, adipisci
-              velit, sed quia non numquam eius modi.
-            </p>
+          <p-tabPanel header="Torsdag - d.17.">
+            <div class="row">
+              <label>Projekt</label>
+              <p-autoComplete
+                [(ngModel)]="selectedProjectAdvanced"
+                [suggestions]="filteredProjects"
+                (completeMethod)="filterProject($event)"
+                field="name"
+                [dropdown]="true"
+              >
+                <ng-template let-project pTemplate="item">
+                  <div class="project-item">
+                    <div>{{ project.id }} - {{ project.name }}</div>
+                  </div>
+                </ng-template>
+              </p-autoComplete>
+            </div>
+
+            <div class="row">
+              <p-divider></p-divider>
+            </div>
+
+            <div class="row">
+              <app-time-pickers
+                [startTime]="startTime"
+                [endTime]="endTime"
+              ></app-time-pickers>
+            </div>
+
+            <div class="row">
+              <p-divider></p-divider>
+            </div>
+
+            <!-- LISTBOX -->
+            <div class="row">
+              <label>Liste over opgaver</label>
+              <p-listbox
+                *ngIf="renderListbox"
+                [(ngModel)]="selectedTasks"
+                [options]="definedTasks"
+                [group]="true"
+                [metaKeySelection]="false"
+                [checkbox]="true"
+                [filter]="true"
+                [multiple]="true"
+                [listStyle]="{ 'max-height': '1250px' }"
+              >
+                <p-header>
+                  <button
+                    pButton
+                    label="Clear search"
+                    type="button"
+                    icon="pi pi-times"
+                    class="p-button-text clear-search-box"
+                    (click)="clearSearchBox($event)"
+                  ></button>
+                </p-header>
+                <ng-template let-group pTemplate="group">
+                  <div class="p-d-flex p-ai-center">
+                    <span>{{ group.label }}</span>
+                  </div>
+                </ng-template>
+              </p-listbox>
+            </div>
+
+            <div class="row">
+              <p-divider></p-divider>
+            </div>
+
+            <!-- TEXTAREA -->
+            <div class="row">
+              <label>Kommentarer</label>
+              <textarea
+                [(ngModel)]="taskComments"
+                id="float-input"
+                rows="5"
+                cols="30"
+                pinputtextarea=""
+                class="p-inputtextarea p-inputtext p-component p-element"
+              >
+              </textarea>
+              <label for="float-input">Udførte opgaver</label>
+            </div>
           </p-tabPanel>
-          <p-tabPanel header="Fredag">
-            <p>
-              At vero eos et accusamus et iusto odio dignissimos ducimus qui
-              blanditiis praesentium voluptatum deleniti atque corrupti quos
-              dolores et quas molestias excepturi sint occaecati cupiditate non
-              provident, similique sunt in culpa qui officia deserunt mollitia
-              animi, id est laborum et dolorum fuga. Et harum quidem rerum
-              facilis est et expedita distinctio. Nam libero tempore, cum soluta
-              nobis est eligendi optio cumque nihil impedit quo minus.
-            </p>
+          <p-tabPanel header="Fredag - d.18.">
+            <div class="row">
+              <label>Projekt</label>
+              <p-autoComplete
+                [(ngModel)]="selectedProjectAdvanced"
+                [suggestions]="filteredProjects"
+                (completeMethod)="filterProject($event)"
+                field="name"
+                [dropdown]="true"
+              >
+                <ng-template let-project pTemplate="item">
+                  <div class="project-item">
+                    <div>{{ project.id }} - {{ project.name }}</div>
+                  </div>
+                </ng-template>
+              </p-autoComplete>
+            </div>
+
+            <div class="row">
+              <p-divider></p-divider>
+            </div>
+
+            <div class="row">
+              <app-time-pickers
+                [startTime]="startTime"
+                [endTime]="endTime"
+              ></app-time-pickers>
+            </div>
+
+            <div class="row">
+              <p-divider></p-divider>
+            </div>
+
+            <!-- LISTBOX -->
+            <div class="row">
+              <label>Liste over opgaver</label>
+              <p-listbox
+                *ngIf="renderListbox"
+                [(ngModel)]="selectedTasks"
+                [options]="definedTasks"
+                [group]="true"
+                [metaKeySelection]="false"
+                [checkbox]="true"
+                [filter]="true"
+                [multiple]="true"
+                [listStyle]="{ 'max-height': '1250px' }"
+              >
+                <p-header>
+                  <button
+                    pButton
+                    label="Clear search"
+                    type="button"
+                    icon="pi pi-times"
+                    class="p-button-text clear-search-box"
+                    (click)="clearSearchBox($event)"
+                  ></button>
+                </p-header>
+                <ng-template let-group pTemplate="group">
+                  <div class="p-d-flex p-ai-center">
+                    <span>{{ group.label }}</span>
+                  </div>
+                </ng-template>
+              </p-listbox>
+            </div>
+
+            <div class="row">
+              <p-divider></p-divider>
+            </div>
+
+            <!-- TEXTAREA -->
+            <div class="row">
+              <label>Kommentarer</label>
+              <textarea
+                [(ngModel)]="taskComments"
+                id="float-input"
+                rows="5"
+                cols="30"
+                pinputtextarea=""
+                class="p-inputtextarea p-inputtext p-component p-element"
+              >
+              </textarea>
+              <label for="float-input">Udførte opgaver</label>
+            </div>
           </p-tabPanel>
-          <p-tabPanel header="Lørdag">
-            <p>
-              Sed ut perspiciatis unde omnis iste natus error sit voluptatem
-              accusantium doloremque laudantium, totam rem aperiam, eaque ipsa
-              quae ab illo inventore veritatis et quasi architecto beatae vitae
-              dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit
-              aspernatur aut odit aut fugit, sed quia consequuntur magni dolores
-              eos qui ratione voluptatem sequi nesciunt. Consectetur, adipisci
-              velit, sed quia non numquam eius modi.
-            </p>
+          <p-tabPanel header="Lørdag - d.19.">
+            <div class="row">
+              <label>Projekt</label>
+              <p-autoComplete
+                [(ngModel)]="selectedProjectAdvanced"
+                [suggestions]="filteredProjects"
+                (completeMethod)="filterProject($event)"
+                field="name"
+                [dropdown]="true"
+              >
+                <ng-template let-project pTemplate="item">
+                  <div class="project-item">
+                    <div>{{ project.id }} - {{ project.name }}</div>
+                  </div>
+                </ng-template>
+              </p-autoComplete>
+            </div>
+
+            <div class="row">
+              <p-divider></p-divider>
+            </div>
+
+            <div class="row">
+              <app-time-pickers
+                [startTime]="startTime"
+                [endTime]="endTime"
+              ></app-time-pickers>
+            </div>
+
+            <div class="row">
+              <p-divider></p-divider>
+            </div>
+
+            <!-- LISTBOX -->
+            <div class="row">
+              <label>Liste over opgaver</label>
+              <p-listbox
+                *ngIf="renderListbox"
+                [(ngModel)]="selectedTasks"
+                [options]="definedTasks"
+                [group]="true"
+                [metaKeySelection]="false"
+                [checkbox]="true"
+                [filter]="true"
+                [multiple]="true"
+                [listStyle]="{ 'max-height': '1250px' }"
+              >
+                <p-header>
+                  <button
+                    pButton
+                    label="Clear search"
+                    type="button"
+                    icon="pi pi-times"
+                    class="p-button-text clear-search-box"
+                    (click)="clearSearchBox($event)"
+                  ></button>
+                </p-header>
+                <ng-template let-group pTemplate="group">
+                  <div class="p-d-flex p-ai-center">
+                    <span>{{ group.label }}</span>
+                  </div>
+                </ng-template>
+              </p-listbox>
+            </div>
+
+            <div class="row">
+              <p-divider></p-divider>
+            </div>
+
+            <!-- TEXTAREA -->
+            <div class="row">
+              <label>Kommentarer</label>
+              <textarea
+                [(ngModel)]="taskComments"
+                id="float-input"
+                rows="5"
+                cols="30"
+                pinputtextarea=""
+                class="p-inputtextarea p-inputtext p-component p-element"
+              >
+              </textarea>
+              <label for="float-input">Udførte opgaver</label>
+            </div>
           </p-tabPanel>
-          <p-tabPanel header="Søndag">
-            <p>
-              At vero eos et accusamus et iusto odio dignissimos ducimus qui
-              blanditiis praesentium voluptatum deleniti atque corrupti quos
-              dolores et quas molestias excepturi sint occaecati cupiditate non
-              provident, similique sunt in culpa qui officia deserunt mollitia
-              animi, id est laborum et dolorum fuga. Et harum quidem rerum
-              facilis est et expedita distinctio. Nam libero tempore, cum soluta
-              nobis est eligendi optio cumque nihil impedit quo minus.
-            </p>
+          <p-tabPanel header="Søndag - d.20.">
+            <div class="row">
+              <label>Projekt</label>
+              <p-autoComplete
+                [(ngModel)]="selectedProjectAdvanced"
+                [suggestions]="filteredProjects"
+                (completeMethod)="filterProject($event)"
+                field="name"
+                [dropdown]="true"
+              >
+                <ng-template let-project pTemplate="item">
+                  <div class="project-item">
+                    <div>{{ project.id }} - {{ project.name }}</div>
+                  </div>
+                </ng-template>
+              </p-autoComplete>
+            </div>
+
+            <div class="row">
+              <p-divider></p-divider>
+            </div>
+
+            <div class="row">
+              <app-time-pickers
+                [startTime]="startTime"
+                [endTime]="endTime"
+              ></app-time-pickers>
+            </div>
+
+            <div class="row">
+              <p-divider></p-divider>
+            </div>
+
+            <!-- LISTBOX -->
+            <div class="row">
+              <label>Liste over opgaver</label>
+              <p-listbox
+                *ngIf="renderListbox"
+                [(ngModel)]="selectedTasks"
+                [options]="definedTasks"
+                [group]="true"
+                [metaKeySelection]="false"
+                [checkbox]="true"
+                [filter]="true"
+                [multiple]="true"
+                [listStyle]="{ 'max-height': '1250px' }"
+              >
+                <p-header>
+                  <button
+                    pButton
+                    label="Clear search"
+                    type="button"
+                    icon="pi pi-times"
+                    class="p-button-text clear-search-box"
+                    (click)="clearSearchBox($event)"
+                  ></button>
+                </p-header>
+                <ng-template let-group pTemplate="group">
+                  <div class="p-d-flex p-ai-center">
+                    <span>{{ group.label }}</span>
+                  </div>
+                </ng-template>
+              </p-listbox>
+            </div>
+
+            <div class="row">
+              <p-divider></p-divider>
+            </div>
+
+            <!-- TEXTAREA -->
+            <div class="row">
+              <label>Kommentarer</label>
+              <textarea
+                [(ngModel)]="taskComments"
+                id="float-input"
+                rows="5"
+                cols="30"
+                pinputtextarea=""
+                class="p-inputtextarea p-inputtext p-component p-element"
+              >
+              </textarea>
+              <label for="float-input">Udførte opgaver</label>
+            </div>
           </p-tabPanel>
 
           <p-divider></p-divider>
