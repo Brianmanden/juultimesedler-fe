@@ -27,7 +27,6 @@ import { getProjectDTO } from './DTOs/getProjectDTO';
 })
 export class AppComponent {
   /* #region Public fields */
-
   APIrootURI: string = 'https://localhost:44352/api';
   workerId: number = 1110;
 
@@ -41,9 +40,6 @@ export class AppComponent {
   /* #region PROJECTS */
   items: string[] = [];
   filteredItems: any[];
-  /* #endregion */
-  /* #region TASKS */
-  taskComments: string;
   /* #endregion */
   /* #region DATES & TIME */
   invalidDates: Array<Date>;
@@ -60,9 +56,11 @@ export class AppComponent {
   selectedProjectAdvanced: number;
   filteredProjects: getProjectDTO[];
   /* #endregion */
-  /* #region LISTBOX */
-  selectedTasks: any[];
+  /* #region TASKS - LISTBOX */
+  renderListbox: boolean = true;
   definedTasks: SelectItemGroup[];
+  selectedTasks: any[];
+  taskComments: string;
   /* #endregion */
   /* #endregion */
   /* #region Private fields */
@@ -183,12 +181,15 @@ export class AppComponent {
   }
 
   clearSearchBox(event: Event): void {
-    // TODO WIP BJA
     const listboxSearchfield = document.querySelectorAll(
       'p-listbox .p-inputtext'
     )[0] as HTMLInputElement;
 
     listboxSearchfield.value = '';
+    this.renderListbox = false;
+    setTimeout(() => {
+      this.renderListbox = true;
+    }, 0);
   }
   /* #endregion */
 }

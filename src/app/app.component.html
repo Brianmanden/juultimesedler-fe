@@ -43,6 +43,7 @@
             <div class="row">
               <label>Liste over opgaver</label>
               <p-listbox
+                *ngIf="renderListbox"
                 [(ngModel)]="selectedTasks"
                 [options]="definedTasks"
                 [group]="true"
