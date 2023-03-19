@@ -15,9 +15,11 @@ import { TimesheetsService } from './Services/timesheets.service';
 import { TasksService } from './Services/task.service';
 /* #endregion */
 /* #region Models and DTOs */
-import { ProjectPickerModel } from './Models/project-picker-model.model';
-import { timesheetDTO } from './DTOs/timesheetDTO';
-import { getProjectDTO } from './DTOs/getProjectDTO';
+import { ProjectPickerModel } from './Models/ProjectPickerModel.model';
+import { PutTimesheetDTO } from './DTOs/PutTimesheetDTO';
+import { GetProjectDTO } from './DTOs/GetProjectDTO';
+import { Timesheet } from './Models/Timesheet';
+import { Workday } from './Models/Workday';
 /* #endregion */
 
 @Component({
@@ -35,7 +37,7 @@ export class AppComponent {
   text: string;
   title = 'juultimesedler';
 
-  value: Date;
+  // value: Date;
 
   /* #region PROJECTS */
   items: string[] = [];
@@ -54,14 +56,13 @@ export class AppComponent {
   /* #region PROJECT PICKER */
   projects: ProjectPickerModel[] = [];
   selectedProjectAdvanced: number;
-  filteredProjects: getProjectDTO[];
+  filteredProjects: GetProjectDTO[];
   /* #endregion */
   /* #region TASKS - LISTBOX */
   renderListbox: boolean = true;
-  definedTasks: SelectItemGroup[];
+  definedTasks: Array<SelectItemGroup[]> = new Array<Array<SelectItemGroup>>(7);
   selectedTasks: any[];
   taskComments: string;
-  /* #endregion */
   /* #endregion */
   /* #region Private fields */
   private handleError: HandleError;
@@ -145,7 +146,13 @@ export class AppComponent {
     invalidDate.setDate(today.getDate() - 1);
     this.invalidDates = [today, invalidDate];
     /* #endregion */
-    this.definedTasks = await this.tasksService.getTasks(this.APIrootURI);
+
+    await this.tasksService.getTasks(this.APIrootURI).then((res) => {
+      for (let i = 0; i < 7; i++) {
+        console.log(res);
+        this.definedTasks[i] = res;
+      }
+    });
   }
 
   /* #region Public methods */
@@ -164,12 +171,27 @@ export class AppComponent {
   }
 
   submitTimesheet(event: any): void {
-    const data: timesheetDTO = new timesheetDTO();
-    data.selectedProjectId = 1115; //this.selectedProjectAdvanced;
-    data.selectedTasks = this.selectedTasks;
-    data.startTime = this.startTime;
-    data.endTime = this.endTime;
-    data.taskComments = this.taskComments;
+    const data: PutTimesheetDTO = new PutTimesheetDTO();
+    data.workerId = this.workerId;
+    data.timeSheets = [];
+
+    const timesheet: Timesheet = new Timesheet();
+    timesheet.Workdays = [];
+    timesheet.WeekNumber = 12;
+
+    for (let i = 0; i < 7; i++) {
+      const workday = new Workday();
+      workday.weekday = i;
+      workday.startTime = '0700';
+      workday.endTime = '1600';
+      workday.selectedProjectId = 1115;
+      workday.selectedTasks = ['slæbe gips', 'skrue gips'];
+      workday.taskComments = '200.- for diesel';
+
+      timesheet.Workdays[i] = workday;
+    }
+
+    data.timeSheets[0] = timesheet;
 
     this.timesheetsService
       .upsertTimesheet(this.APIrootURI, data)
