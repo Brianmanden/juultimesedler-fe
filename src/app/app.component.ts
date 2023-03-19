@@ -10,16 +10,16 @@ import {
   HttpErrorHandler,
   HandleError,
 } from './Services/http-error-handler.service';
-import { ProjectsService } from './Services/project.service';
 import { TimesheetsService } from './Services/timesheets.service';
+import { ProjectsService } from './Services/project.service';
 import { TasksService } from './Services/task.service';
 /* #endregion */
 /* #region Models and DTOs */
 import { ProjectPickerModel } from './Models/ProjectPickerModel.model';
 import { PutTimesheetDTO } from './DTOs/PutTimesheetDTO';
 import { GetProjectDTO } from './DTOs/GetProjectDTO';
-import { Timesheet } from './Models/Timesheet';
 import { Workday } from './Models/Workday';
+import { GetTimesheetDTO } from './DTOs/GetTimesheetDTO';
 /* #endregion */
 
 @Component({
@@ -55,6 +55,7 @@ export class AppComponent {
   /* #endregion */
   /* #region PROJECT PICKER */
   projects: ProjectPickerModel[] = [];
+  timesheet: GetTimesheetDTO;
   selectedProjectAdvanced: number;
   filteredProjects: GetProjectDTO[];
   /* #endregion */
@@ -79,74 +80,12 @@ export class AppComponent {
   }
 
   async ngOnInit() {
-    this.projects = this.projectsService.getCurrentProjects(this.APIrootURI);
-
-    /* #region DAYS & MONTHS */
-    // this.en = {
-    //   firstDayOfWeek: 1,
-    //   dayNames: [
-    //     'Sunday',
-    //     'Monday',
-    //     'Tuesday',
-    //     'Wednesday',
-    //     'Thursday',
-    //     'Friday',
-    //     'Saturday',
-    //   ],
-    //   dayNamesShort: ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'],
-    //   dayNamesMin: ['Su', 'M', 'Tu', 'W', 'Th', 'F', 'Sa'],
-    //   monthNames: [
-    //     'January',
-    //     'February',
-    //     'March',
-    //     'April',
-    //     'May',
-    //     'June',
-    //     'July',
-    //     'August',
-    //     'September',
-    //     'October',
-    //     'November',
-    //     'December',
-    //   ],
-    //   monthNamesShort: [
-    //     'Jan',
-    //     'Feb',
-    //     'Mar',
-    //     'Apr',
-    //     'May',
-    //     'Jun',
-    //     'Jul',
-    //     'Aug',
-    //     'Sep',
-    //     'Oct',
-    //     'Nov',
-    //     'Dec',
-    //   ],
-    //   today: 'Today',
-    //   clear: 'Clear',
-    // };
-    /* #endregion */
-    /* #region TIME VARIABLES */
-    let today = new Date();
-    let month = today.getMonth();
-    let year = today.getFullYear();
-    let prevMonth = month === 0 ? 11 : month - 1;
-    let prevYear = prevMonth === 11 ? year - 1 : year;
-    let nextMonth = month === 11 ? 0 : month + 1;
-    let nextYear = nextMonth === 0 ? year + 1 : year;
-    this.minDate = new Date();
-    this.minDate.setMonth(prevMonth);
-    this.minDate.setFullYear(prevYear);
-    this.maxDate = new Date();
-    this.maxDate.setMonth(nextMonth);
-    this.maxDate.setFullYear(nextYear);
-
-    let invalidDate = new Date();
-    invalidDate.setDate(today.getDate() - 1);
-    this.invalidDates = [today, invalidDate];
-    /* #endregion */
-
+    this.timesheet = await this.timesheetsService.getCurrentTimesheet(
+      this.APIrootURI
+    );
+    this.projects = await this.projectsService.getCurrentProjects(
+      this.APIrootURI
+    );
     await this.tasksService.getTasks(this.APIrootURI).then((res) => {
       for (let i = 0; i < 7; i++) {
         this.definedTasks[i] = res;
