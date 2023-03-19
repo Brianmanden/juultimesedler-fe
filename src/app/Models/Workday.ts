@@ -1,7 +1,8 @@
-export class timesheetDTO {
+export class Workday {
+  weekday: number;
   selectedProjectId: number;
   selectedTasks: string[];
-  startTime: Date;
-  endTime: Date;
+  startTime: string;
+  endTime: string;
   taskComments: string;
 }
