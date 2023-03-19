@@ -2,8 +2,8 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { HttpHeaders } from '@angular/common/http';
 import { HttpErrorHandler, HandleError } from './http-error-handler.service';
-import { ProjectPickerModel } from '../Models/project-picker-model.model';
-import { getProjectDTO } from '../DTOs/getProjectDTO';
+import { ProjectPickerModel } from '../Models/ProjectPickerModel.model';
+import { GetProjectDTO } from '../DTOs/GetProjectDTO';
 
 const httpOptions = {
   headers: new HttpHeaders({
@@ -34,7 +34,7 @@ export class ProjectsService {
     })
       .then((response) => response.json())
       .then((data) => {
-        data.forEach((item: getProjectDTO) => {
+        data.forEach((item: GetProjectDTO) => {
           returnList.push({
             id: item.projectId,
             name: item.projectName,

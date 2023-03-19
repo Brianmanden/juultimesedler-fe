@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { HttpErrorHandler, HandleError } from './http-error-handler.service';
-import { TasksGroupDTO } from '../DTOs/tasksGroupDTO';
 import { SelectItem, SelectItemGroup } from 'primeng/api';
+
+import { TasksGroupDTO } from '../DTOs/TasksGroupDTO';
 
 @Injectable({
   providedIn: 'root',
