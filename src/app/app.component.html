@@ -5,7 +5,9 @@
   <div class="row p-buttonset">
     <!-- <span class="p-buttonset"> -->
     <button pButton icon="pi pi-chevron-left" (click)="openPrev()"></button>
-    <button pButton type="button">Week #{{ timesheet.weekNumber }}</button>
+    <button pButton class="p-button-lg" type="button">
+      Week #{{ timesheet.weekNumber }}
+    </button>
     <button pButton icon="pi pi-chevron-right" (click)="openNext()"></button>
     <!-- </span> -->
   </div>
