@@ -4,6 +4,7 @@ import { Component } from '@angular/core';
 /* #endregion */
 /* #region PrimeNG */
 import { SelectItemGroup } from 'primeng/api';
+import { BadgeModule } from 'primeng/badge';
 /* #endregion */
 /* #region Services */
 import {
@@ -94,6 +95,16 @@ export class AppComponent {
   }
 
   /* #region Public methods */
+  index: number = 0;
+
+  openNext() {
+    this.index = this.index === 7 ? 0 : this.index + 1;
+  }
+
+  openPrev() {
+    this.index = this.index === 0 ? 7 : this.index - 1;
+  }
+
   filterProject(event: { query: any }) {
     let filtered: any[] = [];
     let query = event.query;

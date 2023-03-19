@@ -2,13 +2,17 @@
   class="p-fluid p-grid p-formgrid"
   *ngIf="timesheet && timesheet.weekDays != undefined"
 >
-  <div class="row">
-    <h2>Week #{{ timesheet.weekNumber }}</h2>
+  <div class="row p-buttonset">
+    <!-- <span class="p-buttonset"> -->
+    <button pButton icon="pi pi-chevron-left" (click)="openPrev()"></button>
+    <button pButton type="button">Week #{{ timesheet.weekNumber }}</button>
+    <button pButton icon="pi pi-chevron-right" (click)="openNext()"></button>
+    <!-- </span> -->
   </div>
   <div class="row">
     <div class="p-field p-col-12 p-md-4">
       <div class="card">
-        <p-tabView [scrollable]="false">
+        <p-tabView [scrollable]="false" [(activeIndex)]="index">
           <p-tabPanel
             *ngFor="let workday of timesheet.weekDays; index as i"
             header="{{ timesheet.weekDays[i] }} - {{ timesheet.weekDates[i] }}."
@@ -39,7 +43,7 @@
             <div class="row"><p-divider></p-divider></div>
             <!-- LISTBOX -->
             <div class="row">
-              <label>Liste over opgaver</label>
+              <label>List of tasks</label>
               <p-listbox
                 *ngIf="renderListbox"
                 [(ngModel)]="selectedTasks"
@@ -81,7 +85,6 @@
                 class="p-inputtextarea p-inputtext p-component p-element"
               >
               </textarea>
-              <label for="float-input">Udførte opgaver</label>
             </div>
           </p-tabPanel>
 
