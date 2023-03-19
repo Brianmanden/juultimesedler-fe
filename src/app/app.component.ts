@@ -51,7 +51,7 @@ export class AppComponent {
   rangeDates: Date[];
   minDate: Date;
   maxDate: Date;
-  en: any;
+  // en: any;
   /* #endregion */
   /* #region PROJECT PICKER */
   projects: ProjectPickerModel[] = [];
@@ -82,50 +82,50 @@ export class AppComponent {
     this.projects = this.projectsService.getCurrentProjects(this.APIrootURI);
 
     /* #region DAYS & MONTHS */
-    this.en = {
-      firstDayOfWeek: 1,
-      dayNames: [
-        'Sunday',
-        'Monday',
-        'Tuesday',
-        'Wednesday',
-        'Thursday',
-        'Friday',
-        'Saturday',
-      ],
-      dayNamesShort: ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'],
-      dayNamesMin: ['Su', 'M', 'Tu', 'W', 'Th', 'F', 'Sa'],
-      monthNames: [
-        'January',
-        'February',
-        'March',
-        'April',
-        'May',
-        'June',
-        'July',
-        'August',
-        'September',
-        'October',
-        'November',
-        'December',
-      ],
-      monthNamesShort: [
-        'Jan',
-        'Feb',
-        'Mar',
-        'Apr',
-        'May',
-        'Jun',
-        'Jul',
-        'Aug',
-        'Sep',
-        'Oct',
-        'Nov',
-        'Dec',
-      ],
-      today: 'Today',
-      clear: 'Clear',
-    };
+    // this.en = {
+    //   firstDayOfWeek: 1,
+    //   dayNames: [
+    //     'Sunday',
+    //     'Monday',
+    //     'Tuesday',
+    //     'Wednesday',
+    //     'Thursday',
+    //     'Friday',
+    //     'Saturday',
+    //   ],
+    //   dayNamesShort: ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'],
+    //   dayNamesMin: ['Su', 'M', 'Tu', 'W', 'Th', 'F', 'Sa'],
+    //   monthNames: [
+    //     'January',
+    //     'February',
+    //     'March',
+    //     'April',
+    //     'May',
+    //     'June',
+    //     'July',
+    //     'August',
+    //     'September',
+    //     'October',
+    //     'November',
+    //     'December',
+    //   ],
+    //   monthNamesShort: [
+    //     'Jan',
+    //     'Feb',
+    //     'Mar',
+    //     'Apr',
+    //     'May',
+    //     'Jun',
+    //     'Jul',
+    //     'Aug',
+    //     'Sep',
+    //     'Oct',
+    //     'Nov',
+    //     'Dec',
+    //   ],
+    //   today: 'Today',
+    //   clear: 'Clear',
+    // };
     /* #endregion */
     /* #region TIME VARIABLES */
     let today = new Date();
@@ -149,7 +149,6 @@ export class AppComponent {
 
     await this.tasksService.getTasks(this.APIrootURI).then((res) => {
       for (let i = 0; i < 7; i++) {
-        console.log(res);
         this.definedTasks[i] = res;
       }
     });
@@ -171,13 +170,10 @@ export class AppComponent {
   }
 
   submitTimesheet(event: any): void {
-    const data: PutTimesheetDTO = new PutTimesheetDTO();
-    data.workerId = this.workerId;
-    data.timeSheets = [];
-
-    const timesheet: Timesheet = new Timesheet();
-    timesheet.Workdays = [];
-    timesheet.WeekNumber = 12;
+    const timesheet: PutTimesheetDTO = new PutTimesheetDTO();
+    timesheet.workerId = this.workerId;
+    timesheet.weekNumber = 12;
+    timesheet.workdays = [];
 
     for (let i = 0; i < 7; i++) {
       const workday = new Workday();
@@ -188,13 +184,11 @@ export class AppComponent {
       workday.selectedTasks = ['slæbe gips', 'skrue gips'];
       workday.taskComments = '200.- for diesel';
 
-      timesheet.Workdays[i] = workday;
+      timesheet.workdays[i] = workday;
     }
 
-    data.timeSheets[0] = timesheet;
-
     this.timesheetsService
-      .upsertTimesheet(this.APIrootURI, data)
+      .putTimesheet(this.APIrootURI, timesheet)
       .subscribe((res) => {
         console.group('Timesheet upserted');
         console.table(res);

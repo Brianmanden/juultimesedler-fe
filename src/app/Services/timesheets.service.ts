@@ -24,7 +24,7 @@ export class TimesheetsService {
     this.handleError = httpErrorHandler.createHandleError('TimesheetsService');
   }
 
-  upsertTimesheet(
+  putTimesheet(
     timesheetsURI: string,
     timesheet: PutTimesheetDTO
   ): Observable<PutTimesheetDTO> {
