@@ -4,7 +4,6 @@ import { Component } from '@angular/core';
 /* #endregion */
 /* #region PrimeNG */
 import { SelectItemGroup } from 'primeng/api';
-import { BadgeModule } from 'primeng/badge';
 /* #endregion */
 /* #region Services */
 import {
