@@ -22,11 +22,6 @@ export class TasksService {
 
     await fetch(APIrootURI + '/tasks/', {
       method: 'GET',
-      headers: {
-        'Content-Type': 'application/json',
-        // TODO Fix / remove / ignore Access-Control-Allow-Origin
-        'Access-Control-Allow-Origin': 'QWEQWE',
-      },
     })
       .then((response) => response.json())
       .then((data) => {
