@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { HttpErrorHandler, HandleError } from './http-error-handler.service';
-import { ProjectPickerModel } from '../models/ProjectPickerModel.model';
+import { ProjectPicker } from '../models/ProjectPicker';
 import { GetProjectDTO } from '../DTOs/GetProjectDTO';
 
 @Injectable()
@@ -13,8 +13,8 @@ export class ProjectsService {
     this.handleError = httpErrorHandler.createHandleError('ProjectsService');
   }
 
-  getCurrentProjects(APIrootURI: string): ProjectPickerModel[] {
-    let returnList: ProjectPickerModel[] = [];
+  getCurrentProjects(APIrootURI: string): ProjectPicker[] {
+    let returnList: ProjectPicker[] = [];
 
     fetch(APIrootURI + '/projects/', {
       method: 'GET',

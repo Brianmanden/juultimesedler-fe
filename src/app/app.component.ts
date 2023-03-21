@@ -15,7 +15,7 @@ import { ProjectsService } from './services/project.service';
 import { TasksService } from './services/task.service';
 /* #endregion */
 /* #region Models and DTOs */
-import { ProjectPickerModel } from './models/ProjectPickerModel.model';
+import { ProjectPicker } from './models/ProjectPicker';
 import { PutTimesheetDTO } from './DTOs/PutTimesheetDTO';
 import { GetProjectDTO } from './DTOs/GetProjectDTO';
 import { Workday } from './models/Workday';
@@ -51,7 +51,7 @@ export class AppComponent {
   /* #endregion */
   /* #region PROJECT PICKER */
   filteredProjects: GetProjectDTO[];
-  projects: ProjectPickerModel[] = [];
+  projects: ProjectPicker[] = [];
   selectedProjectAdvanced: number;
   timesheet: GetTimesheetDTO;
   /* #endregion */
