@@ -18,7 +18,6 @@ export class TasksService {
 
   async getTasks(APIrootURI: string): Promise<SelectItemGroup[]> {
     let returnList: SelectItemGroup[] = [];
-    // let returnList: string[] = [];
 
     await fetch(APIrootURI + '/tasks/', {
       method: 'GET',
