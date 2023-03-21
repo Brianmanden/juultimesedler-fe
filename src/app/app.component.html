@@ -2,25 +2,27 @@
   class="p-fluid p-grid p-formgrid"
   *ngIf="timesheet && timesheet.weekDays != undefined"
 >
+  <!-- TAB SWITCHER -->
   <div class="row p-buttonset">
-    <!-- <span class="p-buttonset"> -->
     <button pButton icon="pi pi-chevron-left" (click)="openPrev()"></button>
-    <button pButton class="p-button-lg" type="button">
+    <button pButton class="p-button-lg weeknumber" type="button">
       Week #{{ timesheet.weekNumber }}
     </button>
     <button pButton icon="pi pi-chevron-right" (click)="openNext()"></button>
-    <!-- </span> -->
   </div>
+
   <div class="row">
     <div class="p-field p-col-12 p-md-4">
       <div class="card">
         <p-tabView [scrollable]="false" [(activeIndex)]="index">
+          <!-- TABS WEEKDAYS LOOP -->
           <p-tabPanel
             *ngFor="let workday of timesheet.weekDays; index as i"
             header="{{ timesheet.weekDays[i] }} - {{ timesheet.weekDates[i] }}."
           >
+            <!-- PROJECT PICKER -->
             <div class="row">
-              <label>Projekt</label>
+              <label>Projects</label>
               <p-autoComplete
                 [(ngModel)]="selectedProjectAdvanced"
                 [suggestions]="filteredProjects"
@@ -35,15 +37,20 @@
                 </ng-template>
               </p-autoComplete>
             </div>
-            <div class="row"><p-divider></p-divider></div>
+
+            <p-divider></p-divider>
+
+            <!-- TIME PICKERS -->
             <div class="row">
               <app-time-pickers
                 [startTime]="startTime"
                 [endTime]="endTime"
               ></app-time-pickers>
             </div>
-            <div class="row"><p-divider></p-divider></div>
-            <!-- LISTBOX -->
+
+            <p-divider></p-divider>
+
+            <!-- TASK PICKER -->
             <div class="row">
               <label>List of tasks</label>
               <p-listbox
@@ -74,8 +81,10 @@
                 </ng-template>
               </p-listbox>
             </div>
-            <div class="row"><p-divider></p-divider></div>
-            <!-- TEXTAREA -->
+
+            <p-divider></p-divider>
+
+            <!-- COMMENTS -->
             <div class="row">
               <label>Kommentarer</label>
               <textarea
@@ -92,6 +101,7 @@
 
           <p-divider></p-divider>
 
+          <!-- SUBMIT BTN -->
           <p-button
             (click)="submitTimesheet($event)"
             label="Indsend ugeseddel"

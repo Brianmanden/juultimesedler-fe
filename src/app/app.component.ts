@@ -30,18 +30,14 @@ import { GetTimesheetDTO } from './DTOs/GetTimesheetDTO';
 export class AppComponent {
   /* #region Public fields */
   APIrootURI: string = 'https://localhost:44352/api';
-  workerId: number = 1110;
-
-  results: string[] = [];
   showButtonBar: boolean;
   text: string;
   title = 'juultimesedler';
-
-  // value: Date;
+  workerId: number = 1110;
 
   /* #region PROJECTS */
-  items: string[] = [];
   filteredItems: any[];
+  items: string[] = [];
   /* #endregion */
   /* #region DATES & TIME */
   invalidDates: Array<Date>;
@@ -54,10 +50,10 @@ export class AppComponent {
   // en: any;
   /* #endregion */
   /* #region PROJECT PICKER */
-  projects: ProjectPickerModel[] = [];
-  timesheet: GetTimesheetDTO;
-  selectedProjectAdvanced: number;
   filteredProjects: GetProjectDTO[];
+  projects: ProjectPickerModel[] = [];
+  selectedProjectAdvanced: number;
+  timesheet: GetTimesheetDTO;
   /* #endregion */
   /* #region TASKS - LISTBOX */
   renderListbox: boolean = true;

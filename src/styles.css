@@ -1,3 +1,22 @@
 body {
     padding: 2rem;
 }
+
+label{
+    /* outline: 1px solid red; */
+    padding-bottom: .4rem;
+    padding-left: .4rem;
+    padding-top: 1rem;
+    display: inline-block;
+    font-weight: bold;
+}
+
+.p-tabview-title{
+    font-weight: bold;
+}
+
+.weeknumber.p-button,
+.pi-chevron-left,
+.pi-chevron-right{
+    font-weight: bold;
+}
