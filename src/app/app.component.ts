@@ -9,16 +9,16 @@ import { SelectItemGroup } from 'primeng/api';
 import {
   HttpErrorHandler,
   HandleError,
-} from './Services/http-error-handler.service';
-import { TimesheetsService } from './Services/timesheets.service';
-import { ProjectsService } from './Services/project.service';
-import { TasksService } from './Services/task.service';
+} from './services/http-error-handler.service';
+import { TimesheetsService } from './services/timesheets.service';
+import { ProjectsService } from './services/project.service';
+import { TasksService } from './services/task.service';
 /* #endregion */
 /* #region Models and DTOs */
-import { ProjectPickerModel } from './Models/ProjectPickerModel.model';
+import { ProjectPickerModel } from './models/ProjectPickerModel.model';
 import { PutTimesheetDTO } from './DTOs/PutTimesheetDTO';
 import { GetProjectDTO } from './DTOs/GetProjectDTO';
-import { Workday } from './Models/Workday';
+import { Workday } from './models/Workday';
 import { GetTimesheetDTO } from './DTOs/GetTimesheetDTO';
 /* #endregion */
 

@@ -15,11 +15,11 @@ import { MessageModule } from 'primeng/message';
 import { DividerModule } from 'primeng/divider';
 import { TagModule } from 'primeng/tag';
 import { TimePickersComponent } from './components/time-pickers/time-pickers.component';
-import { HttpErrorHandler } from './Services/http-error-handler.service';
+import { HttpErrorHandler } from './services/http-error-handler.service';
 import { MessageService } from 'primeng/api';
-import { MyMessageService } from './Services/message.service';
-import { ProjectsService } from './Services/project.service';
-import { TimesheetsService } from './Services/timesheets.service';
+import { MyMessageService } from './services/message.service';
+import { ProjectsService } from './services/project.service';
+import { TimesheetsService } from './services/timesheets.service';
 
 @NgModule({
   imports: [

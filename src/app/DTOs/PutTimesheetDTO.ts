@@ -1,5 +1,5 @@
-import { Timesheet } from '../Models/Timesheet';
-import { Workday } from '../Models/Workday';
+import { Timesheet } from '../models/Timesheet';
+import { Workday } from '../models/Workday';
 
 export class PutTimesheetDTO {
   workerId: number;
