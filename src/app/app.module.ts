@@ -14,6 +14,7 @@ import { MessagesModule } from 'primeng/messages';
 import { MessageModule } from 'primeng/message';
 import { DividerModule } from 'primeng/divider';
 import { TagModule } from 'primeng/tag';
+import { ProjectPickerComponent } from './components/project-picker/project-picker.component';
 import { TimePickersComponent } from './components/time-pickers/time-pickers.component';
 import { HttpErrorHandler } from './services/http-error-handler.service';
 import { MessageService } from 'primeng/api';
@@ -38,7 +39,7 @@ import { TimesheetsService } from './services/timesheets.service';
     TagModule,
     HttpClientModule,
   ],
-  declarations: [AppComponent, TimePickersComponent],
+  declarations: [AppComponent, TimePickersComponent, ProjectPickerComponent],
   providers: [
     HttpErrorHandler,
     ProjectsService,
