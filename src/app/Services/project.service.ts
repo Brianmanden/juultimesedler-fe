@@ -13,10 +13,10 @@ export class ProjectsService {
     this.handleError = httpErrorHandler.createHandleError('ProjectsService');
   }
 
-  getCurrentProjects(APIrootURI: string): ProjectPicker[] {
+  async getCurrentProjects(APIrootURI: string): Promise<ProjectPicker[]> {
     let returnList: ProjectPicker[] = [];
 
-    fetch(APIrootURI + '/projects/', {
+    await fetch(APIrootURI + '/projects/', {
       method: 'GET',
     })
       .then((response) => response.json())
